@@ -9,15 +9,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="aerolinea")
+@Table(name="aerolineas")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
 public class Aerolineas {
-    @Id
+    
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
     private Long id;
 
     private String nombre;
