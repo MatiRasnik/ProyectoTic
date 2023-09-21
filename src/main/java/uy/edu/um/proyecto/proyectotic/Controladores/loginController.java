@@ -12,16 +12,20 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
 import uy.edu.um.proyecto.proyectotic.Servicios.UsuariosService;
 
 @Controller
 @FxmlView("Login.fxml")
 public class loginController {
     @Autowired
-    private ConfigurableApplicationContext applicationContext;
+    ConfigurableApplicationContext applicationContext;
 
     @Autowired
     UsuariosService usuariosService;
+
+    @Autowired
+    Configuraciones conf;
 
     @FXML
     private Button button_inciarsesion;
@@ -38,10 +42,11 @@ public class loginController {
         if (permiso==-1){
             System.out.println("Error al inicio de sesion");
         } else if(permiso==1) {
-            FxWeaver fxWeaver=applicationContext.getBean(FxWeaver.class);
-            Parent load=fxWeaver.loadView(vistaMenuAeropuertoController.class);
-            Scene scene=button_inciarsesion.getScene();
-            scene.setRoot(load);
+            conf.cambiarPantalla(button_inciarsesion.getScene(), vistaMenuAeropuertoController.class,applicationContext);
+            // FxWeaver fxWeaver=applicationContext.getBean(FxWeaver.class);
+            // Parent load=fxWeaver.loadView(vistaMenuAeropuertoController.class);
+            // Scene scene=button_inciarsesion.getScene();
+            // scene.setRoot(load);
         }
         
     }

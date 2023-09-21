@@ -15,12 +15,16 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
 
 @Controller
 @FxmlView("vista_Aeropuerto.fxml")
 public class vistaMenuAeropuertoController {
     @Autowired
     private ConfigurableApplicationContext applicationContext;
+
+    @Autowired
+    private Configuraciones conf;
 
     @FXML
     private Menu AerolineaDesplegable;
@@ -34,10 +38,7 @@ public class vistaMenuAeropuertoController {
     @FXML
 
     void desVentanaAerolinea(ActionEvent event){
-        FxWeaver fxWeaver=applicationContext.getBean(FxWeaver.class);
-        Parent load=fxWeaver.loadView(creacionAerolineaController.class);
-        Scene scene=menuAeropuerto.getScene();
-        scene.setRoot(load);
+        conf.cambiarPantalla(menuAeropuerto.getScene(), creacionAerolineaController.class,applicationContext);
         
     }
 
