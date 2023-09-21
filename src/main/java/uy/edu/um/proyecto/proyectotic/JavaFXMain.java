@@ -1,5 +1,6 @@
 package uy.edu.um.proyecto.proyectotic;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import net.rgielen.fxweaver.core.FxWeaver;
@@ -14,7 +15,6 @@ import javafx.stage.Stage;
 
 
 public class JavaFXMain extends Application {
-
     private ConfigurableApplicationContext applicationContext;
 
     @Override
@@ -33,6 +33,8 @@ public class JavaFXMain extends Application {
     	Scene scene = new Scene(root);
     	primaryStage.setScene(scene);
     	primaryStage.show();
+
+
 
 	}
 	@Override

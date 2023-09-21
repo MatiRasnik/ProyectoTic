@@ -22,9 +22,9 @@ public class Aerolineas {
     private Long id;
 
     private String nombre;
+    private String sedePrincipal;
+    private String contacto;
     private String codigo;
-    private String pais;
-    private String telefono;
 
     // puede tener una lista de aviones
 

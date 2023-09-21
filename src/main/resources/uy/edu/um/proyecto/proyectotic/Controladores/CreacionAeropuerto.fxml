@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uy.edu.um.proyecto.proyectotic.Controladores.creacionAeropuertoController">
+   <children>
+      <Pane layoutX="131.0" layoutY="10.0" prefHeight="359.0" prefWidth="383.0" style="-fx-background-color: F9F6EE;">
+         <children>
+            <Label layoutX="154.0" layoutY="50.0" scaleX="3.0" scaleY="3.0" text="Crear Aeropuerto" />
+            <Button fx:id="botonAtrasCrearAeropuerto" onAction="#atras" layoutX="23.0" layoutY="46.0" mnemonicParsing="false" text="←" />
+            <Button fx:id="botonEviarCrearAeropuerto" onAction="#crearAeropuerto" layoutX="166.0" layoutY="268.0" mnemonicParsing="false" text="Enviar" />
+         </children>
+         <effect>
+            <DropShadow radius="14.68" spread="0.15" width="39.72">
+               <color>
+                  <Color opacity="0.6572948098182678" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Pane>
+      <Label layoutX="183.0" layoutY="103.0" text="Nombre" />
+      <Label layoutX="183.0" layoutY="138.0" text="País" />
+      <Label layoutX="179.0" layoutY="172.0" text="Email" />
+      <Label layoutX="179.0" layoutY="206.0" text="Código IATA" />
+      <Label layoutX="179.0" layoutY="240.0" text="Contraseña" />
+      <TextField fx:id="nombreCearAeropuerto" layoutX="261.0" layoutY="99.0" />
+      <TextField fx:id="paisCrearAeropuerto" layoutX="261.0" layoutY="134.0" />
+      <TextField fx:id="emailCrearAeropuerto" layoutX="261.0" layoutY="168.0" />
+      <TextField fx:id="codigoIataAeropuerto" layoutX="261.0" layoutY="202.0" />
+      <TextField fx:id="contrasenaAeropuerto" layoutX="261.0" layoutY="236.0" />
+   </children>
+</Pane>

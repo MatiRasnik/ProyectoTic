@@ -36,10 +36,13 @@ public class vistaMenuAeropuertoController {
     private MenuBar menuAeropuerto;
 
     @FXML
-
     void desVentanaAerolinea(ActionEvent event){
         conf.cambiarPantalla(menuAeropuerto.getScene(), creacionAerolineaController.class,applicationContext);
-        
+    }
+
+    @FXML
+    void desVentanaAeropuerto(ActionEvent event){
+        conf.cambiarPantalla(menuAeropuerto.getScene(), creacionAeropuertoController.class,applicationContext);
     }
 
 }

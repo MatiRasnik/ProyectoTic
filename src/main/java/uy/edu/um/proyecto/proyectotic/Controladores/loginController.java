@@ -39,14 +39,21 @@ public class loginController {
     @FXML
     void onOKButtonClick(ActionEvent event) {
         int permiso = usuariosService.inicioSesion(usuario_login.getText(), contrasena_login.getText());
-        if (permiso==-1){
-            System.out.println("Error al inicio de sesion");
-        } else if(permiso==1) {
-            conf.cambiarPantalla(button_inciarsesion.getScene(), vistaMenuAeropuertoController.class,applicationContext);
-            // FxWeaver fxWeaver=applicationContext.getBean(FxWeaver.class);
-            // Parent load=fxWeaver.loadView(vistaMenuAeropuertoController.class);
-            // Scene scene=button_inciarsesion.getScene();
-            // scene.setRoot(load);
+
+        switch (permiso) {
+            case 1:
+                System.out.println("Aeropuerto");
+                conf.cambiarPantalla(button_inciarsesion.getScene(), vistaMenuAeropuertoController.class,applicationContext);
+                break;
+            case 2:
+                System.out.println("Aerolinea");
+                break;
+            case 3:
+                System.out.println("Usuario");
+                break;
+            default:
+                System.out.println("Error al inicio de sesion");
+                break;
         }
         
     }
