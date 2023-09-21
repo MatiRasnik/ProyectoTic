@@ -13,11 +13,14 @@ import javafx.scene.control.TextField;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
+import uy.edu.um.proyecto.proyectotic.Persistencia.VentanasEmergentes;
 import uy.edu.um.proyecto.proyectotic.Servicios.UsuariosService;
 
 @Controller
 @FxmlView("Login.fxml")
 public class loginController {
+    @Autowired
+    VentanasEmergentes vEmergentes;
     @Autowired
     ConfigurableApplicationContext applicationContext;
 
@@ -52,6 +55,7 @@ public class loginController {
                 System.out.println("Usuario");
                 break;
             default:
+                vEmergentes.ventanaError("Usuario no Existe");
                 System.out.println("Error al inicio de sesion");
                 break;
         }
