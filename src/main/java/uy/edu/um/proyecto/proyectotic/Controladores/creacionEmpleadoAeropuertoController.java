@@ -13,13 +13,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import net.rgielen.fxweaver.core.FxmlView;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
+import uy.edu.um.proyecto.proyectotic.Persistencia.UserSession;
 import uy.edu.um.proyecto.proyectotic.Persistencia.VentanasEmergentes;
 import uy.edu.um.proyecto.proyectotic.Servicios.UsuariosService;
 
 @Controller
 @FxmlView("CrearEmpleadoAeropuerto.fxml")
 public class creacionEmpleadoAeropuertoController {
-
+    
     @Autowired
     UsuariosService usuariosService;
     @Autowired
@@ -53,15 +54,17 @@ public class creacionEmpleadoAeropuertoController {
 
     public void initialize(){
         RolesEmpleadoAeropuerto.getItems().removeAll(RolesEmpleadoAeropuerto.getItems());
-        RolesEmpleadoAeropuerto.setValue("Administrador de Vuelos");
+        RolesEmpleadoAeropuerto.setValue("Seleccione");
         RolesEmpleadoAeropuerto.getItems().setAll("Administrador empresas","Administrador equipaje");
     }
 
     @FXML
 
     public void crearEmpleado(ActionEvent action){
+        UserSession loggedInUser = UserSession.getInstace();
+        
         try{
-            usuariosService.crearUsuario(emailCrearEmpleadoAeropuerto.getText(), nombreCearEmpleadoAeropuerto.getText(), apellidoCrearEmpleadoAeropuerto.getText(), 3, "Aeropuerto1", RolesEmpleadoAeropuerto.getValue(), contraseñaCrearEmpleadoAeropuerto.getText());
+            usuariosService.crearUsuario(emailCrearEmpleadoAeropuerto.getText(), nombreCearEmpleadoAeropuerto.getText(), apellidoCrearEmpleadoAeropuerto.getText(), 1, loggedInUser.getEmpresa(), RolesEmpleadoAeropuerto.getValue(), contraseñaCrearEmpleadoAeropuerto.getText());
         } catch(Exception e){
             vEmergentes.ventanaError("Error al crear Usuario");
         }

@@ -13,7 +13,9 @@ import javafx.scene.control.TextField;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
+import uy.edu.um.proyecto.proyectotic.Persistencia.UserSession;
 import uy.edu.um.proyecto.proyectotic.Persistencia.VentanasEmergentes;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
 import uy.edu.um.proyecto.proyectotic.Servicios.UsuariosService;
 
 @Controller
@@ -41,14 +43,19 @@ public class loginController {
 
     @FXML
     void onOKButtonClick(ActionEvent event) {
-        int permiso = usuariosService.inicioSesion(usuario_login.getText(), contrasena_login.getText());
-
+        Usuarios usuario = usuariosService.inicioSesion(usuario_login.getText(), contrasena_login.getText());
+        int permiso=usuario.getPermiso();
+        UserSession usr=UserSession.getInstace();
+        usr.setEmpresa(usuario.getEmpresa());
+        usr.setPermiso(permiso);
+        usr.setUsername(usuario.getEmail());
         switch (permiso) {
             case 1:
                 System.out.println("Aeropuerto");
                 conf.cambiarPantalla(button_inciarsesion.getScene(), vistaMenuAeropuertoController.class,applicationContext);
                 break;
             case 2:
+                
                 System.out.println("Aerolinea");
                 break;
             case 3:

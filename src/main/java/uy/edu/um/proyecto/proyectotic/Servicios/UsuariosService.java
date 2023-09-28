@@ -21,15 +21,15 @@ public class UsuariosService {
         return encontrado;
         
     }
-    public int inicioSesion(String email,String contrasena){
-        int permiso=-1;
+    public Usuarios inicioSesion(String email,String contrasena){
+        Usuarios usr=null;
         if(verificarExistencia(email)){
              Usuarios usuario=usuariosRepository.findByEmail(email);
              if(usuario.getContrasena().equals(contrasena)){
-                permiso=usuario.getPermiso();
+                usr=usuario;
              }
         }
-        return permiso;
+        return usr;
     }
 
     public void crearUsuario(String email,String nombre, String apellido, int permiso, String empresa, String rol, String contrasena) throws Exception{
