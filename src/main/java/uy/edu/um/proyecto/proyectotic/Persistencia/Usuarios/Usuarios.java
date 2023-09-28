@@ -26,6 +26,10 @@ public class Usuarios {
 
     private int permiso;
 
+    private String rol;
+
+    private String empresa;
+
 
     
 }

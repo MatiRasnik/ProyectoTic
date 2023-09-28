@@ -2,6 +2,7 @@ package uy.edu.um.proyecto.proyectotic.Servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.FlashMapManager;
 
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.UsuariosRepository;
@@ -29,5 +30,23 @@ public class UsuariosService {
              }
         }
         return permiso;
+    }
+
+    public void crearUsuario(String email,String nombre, String apellido, int permiso, String empresa, String rol, String contrasena) throws Exception{
+        if (verificarExistencia(email)){
+            throw new Exception();
+        } else {
+            Usuarios usuario=new Usuarios();
+            usuario.setApellido(apellido);
+            usuario.setRol(rol);
+            usuario.setNombre(nombre);
+            usuario.setPermiso(permiso);
+            usuario.setEmpresa(empresa);
+            usuario.setEmail(email);
+            usuario.setContrasena(contrasena);
+
+            usuariosRepository.save(usuario);
+            
+        }
     }
 }

@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="uy.edu.um.proyecto.proyectotic.Controladores.creacionEmpleadoAeropuertoController">
    <children>
       <Pane layoutX="131.0" layoutY="10.0" prefHeight="359.0" prefWidth="383.0" style="-fx-background-color: F9F6EE;">
          <children>
             <Label layoutX="154.0" layoutY="50.0" scaleX="3.0" scaleY="3.0" text="Crear empleado" />
-            <Button fx:id="botonAtrasCrearAeropuerto" layoutX="23.0" layoutY="46.0" mnemonicParsing="false" text="←" />
-            <Button fx:id="botonCrearEmpleadoAeropuerto" layoutX="166.0" layoutY="268.0" mnemonicParsing="false" text="Crear" />
+            <Button fx:id="botonAtrasCrearAeropuerto"  onAction="#atras" layoutX="23.0" layoutY="46.0" mnemonicParsing="false" text="←" />
+            <Button fx:id="botonCrearEmpleadoAeropuerto"  onAction="#crearEmpleado" layoutX="166.0" layoutY="268.0" mnemonicParsing="false" text="Crear" />
             <Label layoutX="52.0" layoutY="198.0" text="Rol/tarea" />
             <ComboBox fx:id="RolesEmpleadoAeropuerto" layoutX="130.0" layoutY="194.0" prefWidth="150.0" />
             <Label layoutX="52.0" layoutY="228.0" text="Contraseña" />

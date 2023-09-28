@@ -45,5 +45,10 @@ public class vistaMenuAeropuertoController {
         conf.cambiarPantalla(menuAeropuerto.getScene(), creacionAeropuertoController.class,applicationContext);
     }
 
+    @FXML
+    void crearEmpleadoAeropuerto(ActionEvent ecent){
+        conf.cambiarPantalla(menuAeropuerto.getScene(), creacionEmpleadoAeropuertoController.class, applicationContext);
+    }
+
 }
 

@@ -17,6 +17,13 @@
             <MenuItem mnemonicParsing="false" text="Info gral/informes" />
           </items>
         </Menu>
+        <Menu mnemonicParsing="false" text="Empleados">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Crear Empleado"  onAction="#crearEmpleadoAeropuerto" />
+                  <MenuItem mnemonicParsing="false" text="Eliminar Empleado" />
+                  <MenuItem mnemonicParsing="false" text="Modificar Empleado" />
+               </items>
+        </Menu>
         <Menu mnemonicParsing="false" text="Vuelos">
                <items>
                   <MenuItem mnemonicParsing="false" text="Crear vuelo" />
@@ -46,7 +53,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Aeropuerto">
                <items>
-                   <MenuItem mnemonicParsing="false" text="Crear aeropuerto" onAction="#desVentanaAeropuerto"/>
+                  <MenuItem mnemonicParsing="false" text="Crear aeropuerto" onAction="#desVentanaAeropuerto"/>
                   <MenuItem mnemonicParsing="false" text="Modificar Informacion" />
                   <Menu mnemonicParsing="false" text="Informes" />
                </items>

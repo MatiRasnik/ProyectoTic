@@ -5,6 +5,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import net.rgielen.fxweaver.core.FxWeaver;
 import uy.edu.um.proyecto.proyectotic.Controladores.creacionAerolineaController;
+import uy.edu.um.proyecto.proyectotic.Controladores.creacionEmpleadoAeropuertoController;
 import uy.edu.um.proyecto.proyectotic.Controladores.loginController;
 import uy.edu.um.proyecto.proyectotic.Controladores.vistaMenuAeropuertoController;
 import javafx.application.Application;
