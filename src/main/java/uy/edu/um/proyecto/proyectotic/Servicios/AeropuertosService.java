@@ -11,24 +11,12 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.Aeropuertos;
 
 @Service
 public class AeropuertosService {
-    @Autowired
-    private AerolineaRepository aerolineaRepositorio;
+
 
     @Autowired
     private AeropuertoRepository aeropuertoRepository;
 
-    public void crearAereolinea(String nombre,String codigo,String contacto,String ubicacionSede){
-        if(aerolineaRepositorio.findByCodigo(codigo)==null){
-            Aerolineas aerolinea=new Aerolineas();
-            aerolinea.setCodigo(codigo);
-            aerolinea.setNombre(nombre);
-            aerolinea.setContacto(contacto);
-            aerolinea.setSedePrincipal(ubicacionSede);
-            aerolineaRepositorio.save(aerolinea);
-        } else {
-            System.out.println("Error");
-        }
-    }
+    
 
     public void crearAeropuerto(String mail, String contrasena, String pais, String codigo, String nombre) {
         if(aeropuertoRepository.findByCodigo(codigo)==null){

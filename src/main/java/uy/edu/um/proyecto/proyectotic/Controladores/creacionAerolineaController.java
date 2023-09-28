@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import net.rgielen.fxweaver.core.FxmlView;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
+import uy.edu.um.proyecto.proyectotic.Servicios.AerolineasService;
 import uy.edu.um.proyecto.proyectotic.Servicios.AeropuertosService;
 @Controller
 @FxmlView("CreacionAerolineaPorAeropuerto.fxml")
@@ -19,6 +20,9 @@ public class creacionAerolineaController {
 
     @Autowired
     private AeropuertosService aeropuertosService;
+
+    @Autowired
+    private AerolineasService aerolineasService;
 
     @Autowired
     private Configuraciones configuraciones;
@@ -46,7 +50,7 @@ public class creacionAerolineaController {
 
     @FXML
     void crearAereolinea(ActionEvent event) {
-        aeropuertosService.crearAereolinea(nombre_aerolinea_reg_aeropuerto.getText(), codigo_aerolinea_reg_aeropuerto.getText(), contacto_aerolinea_reg_aeropuerto.getText(), sede_principal_aerolinea_reg_aeropuerto.getText());
+        aerolineasService.crearAereolinea(nombre_aerolinea_reg_aeropuerto.getText(), codigo_aerolinea_reg_aeropuerto.getText(), contacto_aerolinea_reg_aeropuerto.getText(), sede_principal_aerolinea_reg_aeropuerto.getText());
     }
 
     @FXML
