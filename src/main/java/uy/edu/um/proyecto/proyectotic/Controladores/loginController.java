@@ -44,28 +44,38 @@ public class loginController {
     @FXML
     void onOKButtonClick(ActionEvent event) {
         Usuarios usuario = usuariosService.inicioSesion(usuario_login.getText(), contrasena_login.getText());
-        int permiso=usuario.getPermiso();
-        UserSession usr=UserSession.getInstace();
-        usr.setEmpresa(usuario.getEmpresa());
-        usr.setPermiso(permiso);
-        usr.setUsername(usuario.getEmail());
-        switch (permiso) {
-            case 1:
-                System.out.println("Aeropuerto");
-                conf.cambiarPantalla(button_inciarsesion.getScene(), vistaMenuAeropuertoController.class,applicationContext);
-                break;
-            case 2:
-                
-                System.out.println("Aerolinea");
-                break;
-            case 3:
-                System.out.println("Usuario");
-                break;
-            default:
-                vEmergentes.ventanaError("Usuario no Existe");
-                System.out.println("Error al inicio de sesion");
-                break;
+        if (usuario==null){
+            vEmergentes.ventanaError("Usuario no Existe");
+            System.out.println("Error al inicio de sesion");
+        } else {
+            int permiso=usuario.getPermiso();
+            UserSession usr=UserSession.getInstace();
+            usr.setEmpresa(usuario.getEmpresa());
+            usr.setPermiso(permiso);
+            usr.setUsername(usuario.getEmail());
+            switch (permiso) {
+                case 0:
+                    System.out.println("Admin");
+                    conf.cambiarPantalla(button_inciarsesion.getScene(), vistaMenuAeropuertoController.class,applicationContext);
+                    break;
+                case 1:
+                    System.out.println("Aeropuerto");
+                    conf.cambiarPantalla(button_inciarsesion.getScene(), vistaMenuAeropuertoController.class,applicationContext);
+                    break;
+                case 2:
+                    
+                    System.out.println("Aerolinea");
+                    break;
+                case 3:
+                    System.out.println("Usuario");
+                    break;
+                default:
+                    vEmergentes.ventanaError("Usuario no Existe");
+                    System.out.println("Error al inicio de sesion");
+                    break;
+            }
         }
+
         
     }
 

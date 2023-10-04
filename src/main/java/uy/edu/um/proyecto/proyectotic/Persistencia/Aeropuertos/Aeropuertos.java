@@ -18,11 +18,11 @@ public class Aeropuertos {
     private Long id;
 
     private String nombre;
-    private String ciudad;
     private String pais;
-    private String codigo;
+    private String codigoIATA;
     private int cantidadPuertas;
     private int cantidadMangas;
+    private int cantidadPuestos;
 
     // puede tener una lista de las aerolineas que operan en el
 

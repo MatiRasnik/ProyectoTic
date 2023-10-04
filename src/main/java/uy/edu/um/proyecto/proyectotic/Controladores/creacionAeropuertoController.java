@@ -10,6 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 import uy.edu.um.proyecto.proyectotic.Servicios.AeropuertosService;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
+import uy.edu.um.proyecto.proyectotic.Persistencia.VentanasEmergentes;
 
 @Controller
 @FxmlView("CreacionAeropuerto.fxml")
@@ -24,30 +25,47 @@ public class creacionAeropuertoController {
     @Autowired
     ConfigurableApplicationContext applicationContext;
 
-    @FXML
-    private TextField emailCrearAeropuerto;
-
-    @FXML
-    private TextField contrasenaAeropuerto;
-
-    @FXML
-    private TextField paisCrearAeropuerto;
-
-    @FXML
-    private Button botonEviarCrearAeropuerto;
-
-    @FXML
-    private TextField codigoIataAeropuerto;
+    @Autowired
+    VentanasEmergentes vEmergentes;
 
     @FXML
     private Button botonAtrasCrearAeropuerto;
 
     @FXML
+    private Button botonEviarCrearAeropuerto;
+
+    @FXML
+    private TextField cantidadMangasAeropuerto;
+
+    @FXML
+    private TextField cantidadPuertasAeropuerto;
+
+    @FXML
+    private TextField cantidadPuestosCheckInAeropuerto;
+
+    @FXML
+    private TextField codigoIataAeropuerto;
+
+    @FXML
+    private TextField contrasenaAeropuerto;
+
+    @FXML
+    private TextField emailCrearAeropuerto;
+
+    @FXML
     private TextField nombreCearAeropuerto;
 
     @FXML
+    private TextField paisCrearAeropuerto;
+
+    @FXML
     void crearAeropuerto(ActionEvent event) {
-        aeropuertosService.crearAeropuerto(emailCrearAeropuerto.getText(), contrasenaAeropuerto.getText(), paisCrearAeropuerto.getText(), codigoIataAeropuerto.getText(), nombreCearAeropuerto.getText());
+        try{
+            aeropuertosService.crearAeropuerto(emailCrearAeropuerto.getText(), contrasenaAeropuerto.getText(), paisCrearAeropuerto.getText(), codigoIataAeropuerto.getText(), nombreCearAeropuerto.getText(), cantidadPuertasAeropuerto.getText(), cantidadMangasAeropuerto.getText(), cantidadPuestosCheckInAeropuerto.getText());
+        } catch (Exception e){
+            vEmergentes.ventanaError("Error al crear Aereopuerto");
+        }
+        
     }
 
     @FXML
