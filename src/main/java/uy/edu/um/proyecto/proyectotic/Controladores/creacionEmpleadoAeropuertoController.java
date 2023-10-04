@@ -53,9 +53,24 @@ public class creacionEmpleadoAeropuertoController {
     @FXML
 
     public void initialize(){
-        RolesEmpleadoAeropuerto.getItems().removeAll(RolesEmpleadoAeropuerto.getItems());
-        RolesEmpleadoAeropuerto.setValue("Seleccione");
-        RolesEmpleadoAeropuerto.getItems().setAll("Administrador empresas","Administrador equipaje");
+        UserSession loggedInUser = UserSession.getInstace();
+        if(loggedInUser!=null){
+            if(loggedInUser.getPermiso()==1){
+                RolesEmpleadoAeropuerto.getItems().removeAll(RolesEmpleadoAeropuerto.getItems());
+                RolesEmpleadoAeropuerto.setValue("Seleccione");
+                RolesEmpleadoAeropuerto.getItems().setAll("Administrador","Check-In","Valijero","Gerente Vuelos","Transportista");
+            } else if(loggedInUser.getPermiso()==2){
+                RolesEmpleadoAeropuerto.getItems().removeAll(RolesEmpleadoAeropuerto.getItems());
+                RolesEmpleadoAeropuerto.setValue("Seleccione");
+                RolesEmpleadoAeropuerto.getItems().setAll("Administrador","Piloto");
+            } else if(loggedInUser.getPermiso()==0){
+                RolesEmpleadoAeropuerto.getItems().removeAll(RolesEmpleadoAeropuerto.getItems());
+                RolesEmpleadoAeropuerto.setValue("Seleccione");
+                RolesEmpleadoAeropuerto.getItems().setAll("Administrador");
+            }
+        } else {
+            vEmergentes.ventanaError("Error al Inicio de Sesion");
+        }
     }
 
     @FXML
@@ -64,7 +79,7 @@ public class creacionEmpleadoAeropuertoController {
         UserSession loggedInUser = UserSession.getInstace();
         
         try{
-            usuariosService.crearUsuario(emailCrearEmpleadoAeropuerto.getText(), nombreCearEmpleadoAeropuerto.getText(), apellidoCrearEmpleadoAeropuerto.getText(), 1, loggedInUser.getEmpresa(), RolesEmpleadoAeropuerto.getValue(), contraseñaCrearEmpleadoAeropuerto.getText());
+            usuariosService.crearUsuario(emailCrearEmpleadoAeropuerto.getText(), nombreCearEmpleadoAeropuerto.getText(), apellidoCrearEmpleadoAeropuerto.getText(), loggedInUser.getPermiso(), loggedInUser.getEmpresa(), RolesEmpleadoAeropuerto.getValue(), contraseñaCrearEmpleadoAeropuerto.getText());
         } catch(Exception e){
             vEmergentes.ventanaError("Error al crear Usuario");
         }

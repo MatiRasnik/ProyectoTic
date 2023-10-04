@@ -63,7 +63,7 @@ public class loginController {
                     conf.cambiarPantalla(button_inciarsesion.getScene(), vistaMenuAeropuertoController.class,applicationContext);
                     break;
                 case 2:
-                    
+                    conf.cambiarPantalla(button_inciarsesion.getScene(), vistaMenuAeropuertoController.class,applicationContext);
                     System.out.println("Aerolinea");
                     break;
                 case 3:

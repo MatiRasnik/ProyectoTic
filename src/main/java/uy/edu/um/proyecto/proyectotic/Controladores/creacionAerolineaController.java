@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import net.rgielen.fxweaver.core.FxmlView;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
+import uy.edu.um.proyecto.proyectotic.Persistencia.VentanasEmergentes;
 import uy.edu.um.proyecto.proyectotic.Servicios.AerolineasService;
 import uy.edu.um.proyecto.proyectotic.Servicios.AeropuertosService;
 @Controller
@@ -19,7 +20,7 @@ import uy.edu.um.proyecto.proyectotic.Servicios.AeropuertosService;
 public class creacionAerolineaController {
 
     @Autowired
-    private AeropuertosService aeropuertosService;
+    private VentanasEmergentes vEmergentes;
 
     @Autowired
     private AerolineasService aerolineasService;
@@ -31,10 +32,19 @@ public class creacionAerolineaController {
     ConfigurableApplicationContext applicationContext;
 
     @FXML
+    private Button botonAtrasCrearAerolinea;
+
+    @FXML
     private TextField codigo_aerolinea_reg_aeropuerto;
 
     @FXML
     private TextField contacto_aerolinea_reg_aeropuerto;
+
+    @FXML
+    private TextField contra_aerolinea_reg_aeropuerto1;
+
+    @FXML
+    private TextField email_aerolinea_reg_aeropuerto1;
 
     @FXML
     private Button enviar_aerolinea_aeropuerto;
@@ -46,11 +56,12 @@ public class creacionAerolineaController {
     private TextField sede_principal_aerolinea_reg_aeropuerto;
 
     @FXML
-    private Button botonAtrasCrearAerolinea;
-
-    @FXML
     void crearAereolinea(ActionEvent event) {
-        aerolineasService.crearAereolinea(nombre_aerolinea_reg_aeropuerto.getText(), codigo_aerolinea_reg_aeropuerto.getText(), contacto_aerolinea_reg_aeropuerto.getText(), sede_principal_aerolinea_reg_aeropuerto.getText());
+        try{
+            aerolineasService.crearAereolinea(nombre_aerolinea_reg_aeropuerto.getText(), codigo_aerolinea_reg_aeropuerto.getText(), contacto_aerolinea_reg_aeropuerto.getText(), sede_principal_aerolinea_reg_aeropuerto.getText(), email_aerolinea_reg_aeropuerto1.getText(),contra_aerolinea_reg_aeropuerto1.getText());
+        } catch (Exception e) {
+            vEmergentes.ventanaError("Error al crear Aerolinea");
+        }
     }
 
     @FXML

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.AeropuertoRepository;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.AerolineaRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
 
@@ -11,8 +12,10 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
 public class AerolineasService {
     @Autowired
     private AerolineaRepository aerolineaRepositorio;
+    @Autowired
+    private UsuariosService usuariosService;
     
-    public void crearAereolinea(String nombre,String codigo,String contacto,String ubicacionSede){
+    public void crearAereolinea(String nombre,String codigo,String contacto,String ubicacionSede,String email,String contra) throws Exception{
         if(aerolineaRepositorio.findByCodigo(codigo)==null){
             Aerolineas aerolinea=new Aerolineas();
             aerolinea.setCodigo(codigo);
@@ -20,8 +23,10 @@ public class AerolineasService {
             aerolinea.setContacto(contacto);
             aerolinea.setSedePrincipal(ubicacionSede);
             aerolineaRepositorio.save(aerolinea);
+            String nombreN="admin"+nombre;
+            usuariosService.crearUsuario(email,nombreN,null,2,nombre,"Administrador",contra);
         } else {
-            System.out.println("Error");
+            throw new Exception();
         }
     }
 
