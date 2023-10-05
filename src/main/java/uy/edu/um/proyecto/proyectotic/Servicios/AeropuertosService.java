@@ -43,7 +43,7 @@ public class AeropuertosService {
             aeropuertoRepository.save(aeropuerto);
             String nombreU="admin"+nombre;
             try{
-                usuariosService.crearUsuario(mail, nombreU, null, 1, nombre, "Administrador", contrasena,null);
+                usuariosService.crearUsuario(mail, nombreU, null, 1, codigo, "Administrador", contrasena,null);
             } catch (Exception e){
                 throw new Exception();
             }

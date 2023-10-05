@@ -16,6 +16,9 @@ public final class UserSession {
         }
         return instance;
     }
+    public static void leaveInstance() {
+        instance=null;
+    }
     
     public void setUsername(String userName){
         this.userName=userName;

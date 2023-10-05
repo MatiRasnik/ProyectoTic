@@ -16,6 +16,7 @@ import javafx.stage.Window;
 import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
+import uy.edu.um.proyecto.proyectotic.Persistencia.UserSession;
 
 @Controller
 @FxmlView("vista_Aeropuerto.fxml")
@@ -37,6 +38,7 @@ public class vistaMenuAeropuertoController {
 
     @FXML
     void atras(ActionEvent event){
+        UserSession.leaveInstance();
         conf.cambiarPantalla(menuAeropuerto.getScene(), loginController.class,applicationContext);
     }
 
@@ -57,6 +59,10 @@ public class vistaMenuAeropuertoController {
     @FXML
     void CrearAvionVista(ActionEvent event){
         conf.cambiarPantalla(menuAeropuerto.getScene(), creacionAvionController.class, applicationContext);
+    }
+    @FXML
+    void crearVuelo(ActionEvent event){
+        conf.cambiarPantalla(menuAeropuerto.getScene(), creacionVueloController.class, applicationContext);
     }
 
 }

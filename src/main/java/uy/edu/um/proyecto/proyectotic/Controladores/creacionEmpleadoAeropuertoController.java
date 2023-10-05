@@ -109,9 +109,6 @@ public class creacionEmpleadoAeropuertoController {
     void atras(ActionEvent event) {
         conf.cambiarPantalla(botonAtrasCrearAeropuerto.getScene(), vistaMenuAeropuertoController.class,applicationContext);
     }
-    @FXML
-    void comboAction(ActionEvent event){
-        System.out.println(RolesEmpleadoAeropuerto.getValue());
-    }
+
 
 }

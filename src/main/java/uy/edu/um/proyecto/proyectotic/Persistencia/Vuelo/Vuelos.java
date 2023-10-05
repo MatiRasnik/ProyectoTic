@@ -29,7 +29,7 @@ public class Vuelos {
     private String aerolinea;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String number;
+    private Long number;
 
     private String codigoVuelo;
     private String matricula;

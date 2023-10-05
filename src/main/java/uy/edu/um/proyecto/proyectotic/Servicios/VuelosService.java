@@ -27,8 +27,10 @@ public class VuelosService {
 
     public void crearVuelo(String aerolinea, String matricula,String aeropuertoSalida, String aeropuertoLlegada, LocalDate fechaSalida, String horaSalida, LocalDate fechaLlegada, String horaLlegada) throws Exception{
         if(avionesRepositorio.findByMatricula(matricula)==null || aeropuertoRepository.findByCodigoIATA(aeropuertoSalida)==null || aeropuertoRepository.findByCodigoIATA(aeropuertoLlegada)==null){
+            System.out.println("NoEXISTE ALGO");
             throw new Exception();
         } else{
+            System.out.println("PROBLEMA");
             Vuelos vuelo=new Vuelos();
             vuelo.setMatricula(matricula);
             vuelo.setAerolinea(aerolinea);
@@ -42,8 +44,11 @@ public class VuelosService {
             vuelo.setEstadoAceptacionSalida(false);
             vuelo.setEstadoVuelo("Esperando aceptacion");
             Vuelos savedVuelo = vuelosRepository.save(vuelo);
-            String numero=savedVuelo.getNumber();
-            savedVuelo.setCodigoVuelo(aerolinea+numero);
+            
+            Long numero=savedVuelo.getNumber();
+            String num=numero.toString();
+            savedVuelo.setCodigoVuelo(aerolinea+num);
+            vuelosRepository.save(savedVuelo);
             
         }
     }
