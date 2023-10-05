@@ -24,4 +24,6 @@ public class Aviones {
     private String matricula;
     private int cantidadPasajeros;
     private float capacidad;
+    private float distanciaVuelo;
+    private String empresa;
 }

@@ -75,7 +75,7 @@ public class creacionEmpleadoAeropuertoController {
 
     @FXML
 
-    public void crearEmpleado(ActionEvent action){
+    void crearEmpleado(ActionEvent action){
         UserSession loggedInUser = UserSession.getInstace();
         
         try{
