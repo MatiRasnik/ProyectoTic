@@ -4,13 +4,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aviones.Aviones;
-import uy.edu.um.proyecto.proyectotic.Persistencia.Aviones.AvionesRepositorio;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Aviones.AvionesRepository;
 
 @Service
 public class AvionesService {
 
     @Autowired
-    private AvionesRepositorio avionesRepositorio;
+    private AvionesRepository avionesRepositorio;
 
     public void crearAvion(String matricula,String modelo, String cantidadPersonas,String capacidadCarga,String distancia,String empresa) throws Exception{
         int cantidadPersonasI=Integer.parseInt(cantidadPersonas);

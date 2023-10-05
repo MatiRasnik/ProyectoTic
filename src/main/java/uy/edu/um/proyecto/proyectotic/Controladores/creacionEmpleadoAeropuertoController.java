@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import net.rgielen.fxweaver.core.FxmlView;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
@@ -51,9 +55,15 @@ public class creacionEmpleadoAeropuertoController {
     private TextField nombreCearEmpleadoAeropuerto;
 
     @FXML
+    private  Label LicenciaPilotoLabel;
+    @FXML
+    private TextField LicenciaPiloto; 
+    @FXML
 
     public void initialize(){
         UserSession loggedInUser = UserSession.getInstace();
+        LicenciaPiloto.setVisible(false);
+        LicenciaPilotoLabel.setVisible(false);
         if(loggedInUser!=null){
             if(loggedInUser.getPermiso()==1){
                 RolesEmpleadoAeropuerto.getItems().removeAll(RolesEmpleadoAeropuerto.getItems());
@@ -63,6 +73,16 @@ public class creacionEmpleadoAeropuertoController {
                 RolesEmpleadoAeropuerto.getItems().removeAll(RolesEmpleadoAeropuerto.getItems());
                 RolesEmpleadoAeropuerto.setValue("Seleccione");
                 RolesEmpleadoAeropuerto.getItems().setAll("Administrador","Piloto");
+                RolesEmpleadoAeropuerto.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
+                   if (newValue=="Piloto"){
+                    LicenciaPiloto.setVisible(true);
+                    LicenciaPilotoLabel.setVisible(true);
+                   } else{
+                    LicenciaPiloto.setVisible(false);
+                    LicenciaPilotoLabel.setVisible(false);
+                    
+                   }
+                }); 
             } else if(loggedInUser.getPermiso()==0){
                 RolesEmpleadoAeropuerto.getItems().removeAll(RolesEmpleadoAeropuerto.getItems());
                 RolesEmpleadoAeropuerto.setValue("Seleccione");
@@ -79,7 +99,7 @@ public class creacionEmpleadoAeropuertoController {
         UserSession loggedInUser = UserSession.getInstace();
         
         try{
-            usuariosService.crearUsuario(emailCrearEmpleadoAeropuerto.getText(), nombreCearEmpleadoAeropuerto.getText(), apellidoCrearEmpleadoAeropuerto.getText(), loggedInUser.getPermiso(), loggedInUser.getEmpresa(), RolesEmpleadoAeropuerto.getValue(), contraseñaCrearEmpleadoAeropuerto.getText());
+            usuariosService.crearUsuario(emailCrearEmpleadoAeropuerto.getText(), nombreCearEmpleadoAeropuerto.getText(), apellidoCrearEmpleadoAeropuerto.getText(), loggedInUser.getPermiso(), loggedInUser.getEmpresa(), RolesEmpleadoAeropuerto.getValue(), contraseñaCrearEmpleadoAeropuerto.getText(),LicenciaPiloto.getText());
         } catch(Exception e){
             vEmergentes.ventanaError("Error al crear Usuario");
         }
@@ -88,6 +108,10 @@ public class creacionEmpleadoAeropuertoController {
     @FXML
     void atras(ActionEvent event) {
         conf.cambiarPantalla(botonAtrasCrearAeropuerto.getScene(), vistaMenuAeropuertoController.class,applicationContext);
+    }
+    @FXML
+    void comboAction(ActionEvent event){
+        System.out.println(RolesEmpleadoAeropuerto.getValue());
     }
 
 }

@@ -24,7 +24,7 @@ public class AerolineasService {
             aerolinea.setSedePrincipal(ubicacionSede);
             aerolineaRepositorio.save(aerolinea);
             String nombreN="admin"+nombre;
-            usuariosService.crearUsuario(email,nombreN,null,2,nombre,"Administrador",contra);
+            usuariosService.crearUsuario(email,nombreN,null,2,nombre,"Administrador",contra,null);
         } else {
             throw new Exception();
         }

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.FlashMapManager;
 
+import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.Pilotos;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.PilotosRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.UsuariosRepository;
 
@@ -11,6 +13,8 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.UsuariosRepository;
 public class UsuariosService {
     @Autowired
     private UsuariosRepository usuariosRepository;
+    @Autowired
+    private PilotosRepository pilotosRepository;
 
     public boolean verificarExistencia(String email){
         Boolean encontrado=false;
@@ -32,7 +36,7 @@ public class UsuariosService {
         return usr;
     }
 
-    public void crearUsuario(String email,String nombre, String apellido, int permiso, String empresa, String rol, String contrasena) throws Exception{
+    public void crearUsuario(String email,String nombre, String apellido, int permiso, String empresa, String rol, String contrasena, String licenciaPiloto) throws Exception{
         if (verificarExistencia(email)){
             throw new Exception();
         } else {
@@ -44,8 +48,14 @@ public class UsuariosService {
             usuario.setEmpresa(empresa);
             usuario.setEmail(email);
             usuario.setContrasena(contrasena);
-
             usuariosRepository.save(usuario);
+            if(rol=="Piloto"){
+                Pilotos piloto=new Pilotos();
+                piloto.setEmail(email);
+                piloto.setLicenciaPiloto(licenciaPiloto);
+                pilotosRepository.save(piloto);
+  
+            }
             
         }
     }

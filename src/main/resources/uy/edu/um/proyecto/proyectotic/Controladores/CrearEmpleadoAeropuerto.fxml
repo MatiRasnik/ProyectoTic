@@ -14,11 +14,13 @@
          <children>
             <Label layoutX="154.0" layoutY="50.0" scaleX="3.0" scaleY="3.0" text="Crear empleado" />
             <Button fx:id="botonAtrasCrearAeropuerto"  onAction="#atras" layoutX="23.0" layoutY="46.0" mnemonicParsing="false" text="←" />
-            <Button fx:id="botonCrearEmpleadoAeropuerto"  onAction="#crearEmpleado" layoutX="166.0" layoutY="268.0" mnemonicParsing="false" text="Crear" />
+            <Button fx:id="botonCrearEmpleadoAeropuerto"  onAction="#crearEmpleado" layoutX="166.0" layoutY="294.0" mnemonicParsing="false" text="Crear" />
             <Label layoutX="52.0" layoutY="198.0" text="Rol/tarea" />
             <ComboBox fx:id="RolesEmpleadoAeropuerto" layoutX="130.0" layoutY="194.0" prefWidth="150.0" />
             <Label layoutX="52.0" layoutY="228.0" text="Contraseña" />
             <TextField fx:id="contraseñaCrearEmpleadoAeropuerto" layoutX="130.0" layoutY="224.0" />
+            <Label fx:id="LicenciaPilotoLabel" layoutX="52.0" layoutY="263.0" text="Licencia Piloto" />
+            <TextField fx:id="LicenciaPiloto" layoutX="130.0" layoutY="259.0" />
          </children>
          <effect>
             <DropShadow radius="14.68" spread="0.15" width="39.72">
