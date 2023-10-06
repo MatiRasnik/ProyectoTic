@@ -12,8 +12,8 @@
           <items>
             <MenuItem fx:id="CrearAerolineaMenu" mnemonicParsing="false" onAction="#desVentanaAerolinea" text="Crear Aerolinea" />
             <MenuItem mnemonicParsing="false" text="Eliminar Aerolinea" />
-            <MenuItem mnemonicParsing="false" text="Modificar Aerolinea" />
-            <MenuItem mnemonicParsing="false" text="Buscar Aerolinea" />
+            <MenuItem mnemonicParsing="false"  text="Modificar Aerolinea" />
+            <MenuItem mnemonicParsing="false" onAction="#desListaAerolineas" text="Lista Aerolinea" />
             <MenuItem mnemonicParsing="false" onAction="#CrearAvionVista" text="Agregar Avion" />
             <MenuItem mnemonicParsing="false" text="Info gral/informes" />
           </items>

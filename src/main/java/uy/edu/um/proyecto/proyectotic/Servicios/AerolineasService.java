@@ -8,6 +8,8 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.AerolineaRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
 
+import java.util.List;
+
 @Service
 public class AerolineasService {
     @Autowired

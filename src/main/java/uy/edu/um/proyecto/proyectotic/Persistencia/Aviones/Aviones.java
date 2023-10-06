@@ -17,13 +17,12 @@ import lombok.Setter;
 
 public class Aviones {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private String matricula;
 
     private String modelo;
-    private String matricula;
     private int cantidadPasajeros;
-    private float capacidad;
+    private float capacidadCarga;
+    private float distanciaDeDespegue;
     private float distanciaVuelo;
     private String empresa;
 }

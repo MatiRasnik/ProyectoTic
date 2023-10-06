@@ -65,5 +65,10 @@ public class vistaMenuAeropuertoController {
         conf.cambiarPantalla(menuAeropuerto.getScene(), creacionVueloController.class, applicationContext);
     }
 
+    @FXML
+    void desListaAerolineas(ActionEvent actionEvent) {
+        System.out.println("cambio a lista aeropuerto");
+        conf.cambiarPantalla(menuAeropuerto.getScene(), listaAeropuertoController.class, applicationContext);
+    }
 }
 

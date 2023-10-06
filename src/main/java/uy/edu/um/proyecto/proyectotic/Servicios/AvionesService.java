@@ -21,7 +21,7 @@ public class AvionesService {
             avion.setMatricula(matricula);
             avion.setModelo(modelo);
             avion.setCantidadPasajeros(cantidadPersonasI);
-            avion.setCapacidad(capacidadCargaF);
+            avion.setCapacidadCarga(capacidadCargaF);
             avion.setDistanciaVuelo(distanciaF);
             avion.setEmpresa(empresa);
             avionesRepositorio.save(avion);           
