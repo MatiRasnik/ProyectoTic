@@ -23,7 +23,7 @@ public class AeropuertoRestService {
     }
 
     @PostMapping
-    public void crearAeropuerto(@RequestBody AeropuertoDTO aeropuertoDTO) throws Exception{
+    public void crearAeropuerto(@RequestBody AeropuertosDTO aeropuertoDTO) throws Exception{
         Aeropuertos aeropuerto = aeropuertoMapper.toAeropuerto(aeropuertoDTO);
     }
 

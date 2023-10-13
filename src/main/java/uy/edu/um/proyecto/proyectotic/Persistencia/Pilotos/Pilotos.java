@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Pilotos {
 
     @Id
-    String licenciaPiloto;
-    String email;
+    private String licenciaPiloto;
+    private String email;
     
 }
