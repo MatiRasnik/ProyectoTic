@@ -12,18 +12,14 @@ public class AvionesService {
     @Autowired
     private AvionesRepository avionesRepositorio;
 
-    public void crearAvion(String matricula,String modelo, String cantidadPersonas,String capacidadCarga,String distancia,String empresa) throws Exception{
+    public void crearAvion(Aviones avion) throws Exception{
+        /*
         int cantidadPersonasI=Integer.parseInt(cantidadPersonas);
         float capacidadCargaF=Float.parseFloat(capacidadCarga);
         float distanciaF=Float.parseFloat(distancia);
+         */
+        String matricula=avion.getMatricula();
         if(avionesRepositorio.findByMatricula(matricula)==null){
-            Aviones avion=new Aviones(); 
-            avion.setMatricula(matricula);
-            avion.setModelo(modelo);
-            avion.setCantidadPasajeros(cantidadPersonasI);
-            avion.setCapacidadCarga(capacidadCargaF);
-            avion.setDistanciaVuelo(distanciaF);
-            avion.setEmpresa(empresa);
             avionesRepositorio.save(avion);           
         } else {
             throw new Exception();

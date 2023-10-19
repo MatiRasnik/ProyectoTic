@@ -20,11 +20,8 @@ public class AeropuertosService {
     private UsuariosService usuariosService;
     
 
-    public void crearAeropuerto(String mail, String contrasena, String pais, String codigo, String nombre, String cantidadPuertas,String cantidadMangas,String cantidadPuestos) throws Exception {
-        int cantidadMangasI=0;
-        int cantidadPuertasI=0;
-        int cantidadPuestosI=0;
-        try{
+    public void crearAeropuerto(Aeropuertos aeropuerto,String mail, String contrasena) throws Exception {
+        /*try{
             cantidadMangasI=Integer.parseInt(cantidadMangas);
             cantidadPuertasI=Integer.parseInt(cantidadPuertas);
             cantidadPuestosI=Integer.parseInt(cantidadPuestos);
@@ -32,23 +29,17 @@ public class AeropuertosService {
         } catch (Exception e){
             throw new Exception();
         }
-        if(aeropuertoRepository.findByCodigoIATA(codigo)==null){
-            Aeropuertos aeropuerto = new Aeropuertos();
-            aeropuerto.setCodigoIATA(codigo);
-            aeropuerto.setNombre(nombre);
-            aeropuerto.setPais(pais);
-            aeropuerto.setCantidadMangas(cantidadMangasI);
-            aeropuerto.setCantidadPuertas(cantidadPuertasI);
-            aeropuerto.setCantidadPuestos(cantidadPuestosI);
+        */
+        if(aeropuertoRepository.findByCodigoIATA(aeropuerto.getCodigoIATA())==null){
             aeropuertoRepository.save(aeropuerto);
-            String nombreU="admin"+nombre;
+            String nombreU="admin"+aeropuerto.getNombre();
             try{
-                usuariosService.crearUsuario(mail, nombreU, null, 1, codigo, "Administrador", contrasena,null);
+                Usuarios usr= new Usuarios(mail,nombreU,null,contrasena,1,"Administrador",aeropuerto.getCodigoIATA());
+                usuariosService.crearUsuario(usr,null);
+
             } catch (Exception e){
                 throw new Exception();
             }
-            
-            
         } else {
             throw new Exception();
         }

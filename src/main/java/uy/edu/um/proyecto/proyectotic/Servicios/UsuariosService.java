@@ -36,22 +36,14 @@ public class UsuariosService {
         return usr;
     }
 
-    public void crearUsuario(String email,String nombre, String apellido, int permiso, String empresa, String rol, String contrasena, String licenciaPiloto) throws Exception{
-        if (verificarExistencia(email)){
+    public void crearUsuario(Usuarios usuario, String licenciaPiloto) throws Exception{
+        if (verificarExistencia(usuario.getEmail())){
             throw new Exception();
         } else {
-            Usuarios usuario=new Usuarios();
-            usuario.setApellido(apellido);
-            usuario.setRol(rol);
-            usuario.setNombre(nombre);
-            usuario.setPermiso(permiso);
-            usuario.setEmpresa(empresa);
-            usuario.setEmail(email);
-            usuario.setContrasena(contrasena);
             usuariosRepository.save(usuario);
-            if(rol=="Piloto"){
+            if(usuario.getRol()=="Piloto"){
                 Pilotos piloto=new Pilotos();
-                piloto.setEmail(email);
+                piloto.setEmail(usuario.getEmail());
                 piloto.setLicenciaPiloto(licenciaPiloto);
                 pilotosRepository.save(piloto);
   

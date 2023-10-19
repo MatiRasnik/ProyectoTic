@@ -17,16 +17,12 @@ public class AerolineasService {
     @Autowired
     private UsuariosService usuariosService;
     
-    public void crearAereolinea(String nombre,String codigo,String contacto,String ubicacionSede,String email,String contra) throws Exception{
-        if(aerolineaRepositorio.findByCodigo(codigo)==null){
-            Aerolineas aerolinea=new Aerolineas();
-            aerolinea.setCodigo(codigo);
-            aerolinea.setNombre(nombre);
-            aerolinea.setContacto(contacto);
-            aerolinea.setSedePrincipal(ubicacionSede);
+    public void crearAereolinea(Aerolineas aerolinea, String email,String contra) throws Exception{
+        if(aerolineaRepositorio.findByCodigo(aerolinea.getCodigo())==null){
             aerolineaRepositorio.save(aerolinea);
-            String nombreN="admin"+nombre;
-            usuariosService.crearUsuario(email,nombreN,null,2,codigo,"Administrador",contra,null);
+            String nombreN="admin"+aerolinea.getNombre();
+            Usuarios usr=new Usuarios(email,nombreN,null,contra,2,"Administrador",aerolinea.getCodigo());
+            usuariosService.crearUsuario(usr,null);
         } else {
             throw new Exception();
         }

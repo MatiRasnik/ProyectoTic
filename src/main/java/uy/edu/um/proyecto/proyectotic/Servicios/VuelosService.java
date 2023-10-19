@@ -25,29 +25,16 @@ public class VuelosService {
     @Autowired
     VuelosRepository vuelosRepository;
 
-    public void crearVuelo(String aerolinea, String matricula,String aeropuertoSalida, String aeropuertoLlegada, LocalDate fechaSalida, String horaSalida, LocalDate fechaLlegada, String horaLlegada) throws Exception{
-        if(avionesRepositorio.findByMatricula(matricula)==null || aeropuertoRepository.findByCodigoIATA(aeropuertoSalida)==null || aeropuertoRepository.findByCodigoIATA(aeropuertoLlegada)==null){
-            System.out.println("NoEXISTE ALGO");
+    public void crearVuelo(Vuelos vuelo) throws Exception{
+        if(avionesRepositorio.findByMatricula(vuelo.getMatricula())==null || aeropuertoRepository.findByCodigoIATA(vuelo.getAeropuertoSalida())==null || aeropuertoRepository.findByCodigoIATA(vuelo.getAeropuertoLlegada())==null){
             throw new Exception();
         } else{
-            System.out.println("PROBLEMA");
-            Vuelos vuelo=new Vuelos();
-            vuelo.setMatricula(matricula);
-            vuelo.setAerolinea(aerolinea);
-            vuelo.setAereopuertoSalida(aeropuertoSalida);
-            vuelo.setAeropuertoLlegada(aeropuertoLlegada);
-            vuelo.setFechaSalida(fechaSalida);
-            vuelo.setHoraSalida(horaSalida);
-            vuelo.setFechaLlegada(fechaLlegada);
-            vuelo.setHoraLlegada(horaLlegada);
-            vuelo.setEstadoAceptacionLlegada(false);
-            vuelo.setEstadoAceptacionSalida(false);
-            vuelo.setEstadoVuelo("Esperando aceptacion");
+
             Vuelos savedVuelo = vuelosRepository.save(vuelo);
             
             Long numero=savedVuelo.getNumber();
             String num=numero.toString();
-            savedVuelo.setCodigoVuelo(aerolinea+num);
+            savedVuelo.setCodigoVuelo(vuelo.getAerolinea()+num);
             vuelosRepository.save(savedVuelo);
             
         }

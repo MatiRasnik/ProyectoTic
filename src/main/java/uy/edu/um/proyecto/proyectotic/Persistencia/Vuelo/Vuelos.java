@@ -33,7 +33,7 @@ public class Vuelos {
 
     private String codigoVuelo;
     private String matricula;
-    private String aereopuertoSalida;
+    private String aeropuertoSalida;
     private String aeropuertoLlegada;
     private Boolean estadoAceptacionSalida;
     private Boolean estadoAceptacionLlegada;
