@@ -1,15 +1,10 @@
 package uy.edu.um.proyecto.proyectotic.Servicios;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.AeropuertoRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aviones.AvionesRepository;
-import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.Pilotos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.PilotosRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Vuelo.Vuelos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Vuelo.VuelosRepository;

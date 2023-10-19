@@ -2,7 +2,6 @@ package uy.edu.um.proyecto.proyectotic.Servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.FlashMapManager;
 
 import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.Pilotos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.PilotosRepository;
@@ -17,7 +16,7 @@ public class UsuariosService {
     private PilotosRepository pilotosRepository;
 
     public boolean verificarExistencia(String email){
-        Boolean encontrado=false;
+        boolean encontrado=false;
         Usuarios usuario=usuariosRepository.findByEmail(email);
         if(usuario!=null){
             encontrado=true;
@@ -41,7 +40,7 @@ public class UsuariosService {
             throw new Exception();
         } else {
             usuariosRepository.save(usuario);
-            if(usuario.getRol()=="Piloto"){
+            if(usuario.getRol().equals("Piloto")){
                 Pilotos piloto=new Pilotos();
                 piloto.setEmail(usuario.getEmail());
                 piloto.setLicenciaPiloto(licenciaPiloto);

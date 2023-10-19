@@ -13,11 +13,6 @@ public class AvionesService {
     private AvionesRepository avionesRepositorio;
 
     public void crearAvion(Aviones avion) throws Exception{
-        /*
-        int cantidadPersonasI=Integer.parseInt(cantidadPersonas);
-        float capacidadCargaF=Float.parseFloat(capacidadCarga);
-        float distanciaF=Float.parseFloat(distancia);
-         */
         String matricula=avion.getMatricula();
         if(avionesRepositorio.findByMatricula(matricula)==null){
             avionesRepositorio.save(avion);           

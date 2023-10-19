@@ -3,12 +3,9 @@ package uy.edu.um.proyecto.proyectotic.Servicios;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.AeropuertoRepository;
-import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.AerolineaRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
-
-import java.util.List;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
 
 @Service
 public class AerolineasService {
