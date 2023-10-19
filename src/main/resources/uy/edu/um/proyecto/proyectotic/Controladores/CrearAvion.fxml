@@ -12,8 +12,8 @@
       <Pane layoutX="131.0" layoutY="10.0" prefHeight="359.0" prefWidth="383.0" style="-fx-background-color: F9F6EE;">
          <children>
             <Label layoutX="154.0" layoutY="50.0" scaleX="3.0" scaleY="3.0" text="Crear avión" />
-            <Button fx:id="botonAtrasCrearEmpleadoAerolinea" layoutX="23.0" layoutY="46.0" mnemonicParsing="false" text="←" />
-            <Button fx:id="botonCrearAvionAerolinea" layoutX="162.0" layoutY="281.0" mnemonicParsing="false" text="Crear" />
+            <Button fx:id="botonAtrasCrearEmpleadoAerolinea" onAction="#atras" layoutX="23.0" layoutY="46.0" mnemonicParsing="false" text="←" />
+            <Button fx:id="botonCrearAvionAerolinea" onAction="#crearAvion" layoutX="162.0" layoutY="281.0" mnemonicParsing="false" text="Crear" />
             <Label layoutX="52.0" layoutY="193.0" text="Capacidad carga" />
             <Label layoutX="50.0" layoutY="226.0" text="Distancia de despegue" />
             <TextField fx:id="DistanciaCrearAvionAerolinea" layoutX="184.0" layoutY="221.0" />

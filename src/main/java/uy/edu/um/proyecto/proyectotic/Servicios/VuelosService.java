@@ -40,8 +40,6 @@ public class VuelosService {
             vuelo.setHoraSalida(horaSalida);
             vuelo.setFechaLlegada(fechaLlegada);
             vuelo.setHoraLlegada(horaLlegada);
-            vuelo.setEstadoAceptacionLlegada(false);
-            vuelo.setEstadoAceptacionSalida(false);
             vuelo.setEstadoVuelo("Esperando aceptacion");
             Vuelos savedVuelo = vuelosRepository.save(vuelo);
             

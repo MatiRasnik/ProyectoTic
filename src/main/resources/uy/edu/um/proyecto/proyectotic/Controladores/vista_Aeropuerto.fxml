@@ -30,7 +30,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#crearVuelo" text="Crear vuelo" />
                   <MenuItem mnemonicParsing="false" text="Eliminar vuelo" />
                   <MenuItem mnemonicParsing="false" text="Modificar vuelo" />
-                  <MenuItem mnemonicParsing="false" text="Buscar vuelo" />
+                  <MenuItem mnemonicParsing="false" onAction="#ListaVuelos" text="Buscar vuelo" />
                   <MenuItem mnemonicParsing="false" text="Info gral/informes" />
                </items>
         </Menu>

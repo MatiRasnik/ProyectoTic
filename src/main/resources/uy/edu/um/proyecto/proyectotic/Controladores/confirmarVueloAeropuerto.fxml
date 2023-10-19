@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="645.0" style="-fx-background-color: 00000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uy.edu.um.proyecto.proyectotic.Controladores.confirmarVueloAeropuertoController">
+   <children>
+      <Button fx:id="botonAtrasConfirmarVuelo" layoutX="58.0" layoutY="27.0" mnemonicParsing="false" onAction="#atras" text="←" />
+      <Text layoutX="270.0" layoutY="44.0" scaleX="3.0" scaleY="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aprobar Vuelo" />
+      <TableView fx:id="TablaConfirmarVuelo" layoutX="49.0" layoutY="74.0" prefHeight="200.0" prefWidth="547.0">
+         <columns>
+            <TableColumn fx:id="columnaNroVuelo" prefWidth="75.0" text="Nro.Vuelo" />
+            <TableColumn fx:id="columnaFechaSalida" prefWidth="84.00005340576172" text="Salida" />
+            <TableColumn fx:id="columnaFechaLlegada" minWidth="0.0" prefWidth="100.0" text="Llegada" />
+            <TableColumn fx:id="columnaAerppuertoSalida" prefWidth="135.199951171875" text="Aeropuerto Salida" />
+            <TableColumn fx:id="columnaAeropuertoLlegada" prefWidth="150.40005493164062" text="Aeropuerto Llegada" />
+         </columns>
+      </TableView>
+      <Button fx:id="botonConfirmarVuelo" layoutX="333.0" layoutY="316.0" mnemonicParsing="false" onAction="#confirmarVuelo" text="Aprobar" />
+      <Button fx:id="botonNegarVuelo" layoutX="233.0" layoutY="316.0" mnemonicParsing="false" onAction="#confirmarVuelo" text="No Aprobar" />
+      <Label layoutX="153.0" layoutY="283.0" text="Manga/Pista Designada" />
+      <ChoiceBox fx:id="mangaPistaDesginada" layoutX="292.0" layoutY="279.0" prefWidth="150.0" />
+   </children>
+</Pane>

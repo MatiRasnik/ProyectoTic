@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Controller;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Configuraciones;
+import uy.edu.um.proyecto.proyectotic.Persistencia.UserSession;
+import uy.edu.um.proyecto.proyectotic.Persistencia.VentanasEmergentes;
 import uy.edu.um.proyecto.proyectotic.Servicios.AvionesService;
 
 @Controller
@@ -23,6 +25,9 @@ public class creacionAvionesController {
 
     @Autowired
     ConfigurableApplicationContext applicationContext;
+
+    @Autowired
+    VentanasEmergentes ventanasEmergentes;
 
     @FXML
     private TextField DistanciaCrearAvionAerolinea;
@@ -46,13 +51,18 @@ public class creacionAvionesController {
     private TextField MatriculaCrearAvionAerolinea;
 
     @FXML
-    void crearAvion(ActionEvent event) {
-         //avionesService.crearAeropuerto(emailCrearAeropuerto.getText(), contrasenaAeropuerto.getText(), paisCrearAeropuerto.getText(), codigoIataAeropuerto.getText(), nombreCearAeropuerto.getText());
+    void crearAvion(ActionEvent event)  {
+        UserSession loggedUsuer = UserSession.getInstace();
+        try {
+            avionesService.crearAvion(MatriculaCrearAvionAerolinea.getText(), ModeloCrearAvionAerolinea.getText(), CapacidadPersonasCrearAvionAerolinea.getText(), CapacidadCargaCrearAvionAerolinea1.getText(), DistanciaCrearAvionAerolinea.getText(), loggedUsuer.getEmpresa());
+        }catch (Exception e){
+            ventanasEmergentes.ventanaError("Error al crear avion.");
+        }
     }
 
     @FXML
     void atras(ActionEvent event) {
-        //configuraciones.cambiarPantalla(botonAtrasCrearAeropuerto.getScene(), vistaMenuAeropuertoController.class,applicationContext);
+        configuraciones.cambiarPantalla(botonAtrasCrearEmpleadoAerolinea.getScene(), vistaMenuAeropuertoController.class,applicationContext);
     }
 
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="378.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uy.edu.um.proyecto.proyectotic.Controladores.creacionVueloController">
    <children>
       <Text layoutX="162.0" layoutY="54.0" scaleX="3.0" scaleY="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creación Vuelo" />
       <TextField fx:id="numeroCreacionVuelo" layoutX="145.0" layoutY="90.0" />
@@ -24,8 +24,8 @@
       <Label layoutX="312.0" layoutY="135.0" text="Hora de salida" />
       <Label layoutX="305.0" layoutY="173.0" text="Fecha de llegada" />
       <Label layoutX="308.0" layoutY="213.0" text="Hora de llegada" />
-      <Button fx:id="botonCrearVuelo" layoutX="458.0" layoutY="263.0" mnemonicParsing="false" text="Crear" />
-      <Button fx:id="atrasCreacionVuelo" layoutX="33.0" layoutY="37.0" mnemonicParsing="false" text="←" />
+      <Button fx:id="botonCrearVuelo" onAction="#crearVuelo" layoutX="458.0" layoutY="263.0" mnemonicParsing="false" text="Crear" />
+      <Button fx:id="atrasCreacionVuelo" onAction="#atras" layoutX="33.0" layoutY="37.0" mnemonicParsing="false" text="←" />
       <Label layoutX="33.0" layoutY="148.0" prefHeight="43.0" prefWidth="206.0" text="Codigo IATA " />
       <Label layoutX="10.0" layoutY="178.0" text="de Aeropuerto de salida" />
       <Label layoutX="38.0" layoutY="201.0" text="Codigo IATA" />
