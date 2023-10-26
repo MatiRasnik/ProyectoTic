@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import uy.edu.um.UsuariosDTO;
+import uy.edu.um.UsuarioTransporte;
 import uy.edu.um.proyecto.proyectotic.Mappers.UsuariosMapper;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
 import uy.edu.um.proyecto.proyectotic.Servicios.UsuariosService;
@@ -22,9 +23,9 @@ public class UsuariosRestService {
     private UsuariosService usuariosService;
     
     @PostMapping("/addUsuarios")
-    public void crearUsuario(@RequestBody UsuariosDTO usuariosDTO, String licenciaPiloto) throws Exception{
-        Usuarios usuario = usuariosMapper.toUsuarios(usuariosDTO);
-        usuariosService.crearUsuario(usuario, licenciaPiloto);
+    public void crearUsuario(@RequestBody UsuarioTransporte usuarioTransporte) throws Exception{
+        Usuarios usuario = usuariosMapper.toUsuarios(usuarioTransporte.getUsuariosDTO());
+        usuariosService.crearUsuario(usuario, usuarioTransporte.getLicenciaPiloto());
     }
 
     @GetMapping("/getUsuarios/{id}")
