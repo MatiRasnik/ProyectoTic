@@ -15,28 +15,27 @@ public class UsuariosService {
     @Autowired
     private PilotosRepository pilotosRepository;
 
-    public boolean verificarExistencia(String email){
+    
+
+    public boolean verificarLogin(String email,String contrasena){
         boolean encontrado=false;
         Usuarios usuario=usuariosRepository.findByEmail(email);
         if(usuario!=null){
-            encontrado=true;
+            if (usuario.getContrasena().equals(contrasena)){
+                encontrado=true;
+            }
+            
         }
         return encontrado;
         
     }
-    public Usuarios inicioSesion(String email,String contrasena){
-        Usuarios usr=null;
-        if(verificarExistencia(email)){
-             Usuarios usuario=usuariosRepository.findByEmail(email);
-             if(usuario.getContrasena().equals(contrasena)){
-                usr=usuario;
-             }
-        }
-        return usr;
+    public Usuarios getUsuarioId(String email){
+        Usuarios usuario=usuariosRepository.findByEmail(email);
+        return usuario;
     }
 
     public void crearUsuario(Usuarios usuario, String licenciaPiloto) throws Exception{
-        if (verificarExistencia(usuario.getEmail())){
+        if (getUsuarioId(usuario.getEmail())!=null){
             throw new Exception();
         } else {
             usuariosRepository.save(usuario);
