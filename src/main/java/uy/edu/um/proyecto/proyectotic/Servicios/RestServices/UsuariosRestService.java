@@ -41,4 +41,10 @@ public class UsuariosRestService {
         
     }
 
+    @PostMapping("/eliminarUsuario")
+    public void eliminarUsuario(@RequestBody String id) throws Exception{
+        usuariosService.eliminarUsuario(id);
+    }
+
+
 }

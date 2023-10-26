@@ -13,18 +13,21 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
 import uy.edu.um.proyecto.proyectotic.Servicios.AerolineasService;
 
 @RestController
-@RequestMapping("/aerolineas")
 public class AerolineasRestService {
     @Autowired
     private AerolineasMapper aerolineasMapper;
     @Autowired
     private AerolineasService aerolineasService;
 
-    @PostMapping
+    @PostMapping("/crearAerolineas")
     public void crearAerolineas(@RequestBody AerolineaTransporte aerolineaTransporte) throws Exception{
         Aerolineas aerolinea = aerolineasMapper.toAerolineas(aerolineaTransporte.getAerolineasDTO());
         aerolineasService.crearAereolinea(aerolinea, aerolineaTransporte.getEmail(), aerolineaTransporte.getContrasena());
 
+    }
+    @PostMapping("/eliminarAerolineas")
+    public void eliminarAerolineas(@RequestBody String id) throws Exception{
+        aerolineasService.eliminarAerolinea(id);
     }
 
 }

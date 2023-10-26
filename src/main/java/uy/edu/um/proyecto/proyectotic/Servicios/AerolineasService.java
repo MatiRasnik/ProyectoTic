@@ -25,4 +25,13 @@ public class AerolineasService {
         }
     }
 
+    public void eliminarAerolinea(String codigo) throws Exception{
+        Aerolineas aerolinea=aerolineaRepositorio.findByCodigo(codigo);
+        if(aerolinea==null){
+            throw new Exception();
+        } else {
+            aerolineaRepositorio.delete(aerolinea);
+        }
+    }
+
 }

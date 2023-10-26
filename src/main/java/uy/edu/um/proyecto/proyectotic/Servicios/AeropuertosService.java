@@ -3,6 +3,7 @@ package uy.edu.um.proyecto.proyectotic.Servicios;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.AeropuertoRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.Aeropuertos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
@@ -31,6 +32,14 @@ public class AeropuertosService {
             }
         } else {
             throw new Exception();
+        }
+    }
+    public void eliminarAeropuerto(String codigo) throws Exception{
+        Aeropuertos aeropuerto=aeropuertoRepository.findByCodigoIATA(codigo);
+        if(aeropuerto==null){
+            throw new Exception();
+        } else {
+            aeropuertoRepository.delete(aeropuerto);
         }
     }
 }

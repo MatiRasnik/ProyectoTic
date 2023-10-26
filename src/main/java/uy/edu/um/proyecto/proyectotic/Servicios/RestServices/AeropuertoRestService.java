@@ -15,19 +15,23 @@ import uy.edu.um.proyecto.proyectotic.Servicios.AeropuertosService;
 import uy.edu.um.AeropuertoTransporte;
 
 @RestController
-@RequestMapping("/aeropuertos")
+
 public class AeropuertoRestService {
     @Autowired
     private AeropuertosMapper aeropuertoMapper;
     @Autowired
     private AeropuertosService aeropuertoService;
 
-    @PostMapping
+    @PostMapping("/crearAeropuertos")
     public void crearAeropuerto(@RequestBody AeropuertoTransporte aeropuertoTransporte ) throws Exception{
         Aeropuertos aeropuerto = aeropuertoMapper.toAeropuerto(aeropuertoTransporte.getAeropuertosDTO());
         aeropuertoService.crearAeropuerto(aeropuerto, aeropuertoTransporte.getEmail(), aeropuertoTransporte.getContrasena());
 
         
+    }
+    @PostMapping("/eliminarAeropuertos")
+    public void eliminarAeropuerto(@RequestBody String id) throws Exception{
+        aeropuertoService.eliminarAeropuerto(id);
     }
 
 

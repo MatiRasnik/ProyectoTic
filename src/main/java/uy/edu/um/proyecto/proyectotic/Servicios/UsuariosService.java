@@ -3,6 +3,7 @@ package uy.edu.um.proyecto.proyectotic.Servicios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.Aeropuertos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.Pilotos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.PilotosRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
@@ -47,6 +48,14 @@ public class UsuariosService {
   
             }
             
+        }
+    }
+    public void eliminarUsuario(String email) throws Exception{
+        Usuarios usr=usuariosRepository.findByEmail(email);
+        if(usr==null){
+            throw new Exception();
+        } else {
+            usuariosRepository.delete(usr);
         }
     }
 }
