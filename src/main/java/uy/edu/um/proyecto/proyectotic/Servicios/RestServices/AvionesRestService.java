@@ -12,14 +12,13 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Aviones.Aviones;
 import uy.edu.um.proyecto.proyectotic.Servicios.AvionesService;
 
 @RestController
-@RequestMapping("/aviones")
 public class AvionesRestService {
     @Autowired
     private AvionesMapper avionesMapper;
     @Autowired
     private AvionesService avionesService;
 
-    @PostMapping
+    @PostMapping("/crearAvion")
     public void crearAvion(@RequestBody AvionesDTO avionesDTO) throws Exception{
         Aviones avion = avionesMapper.toAviones(avionesDTO);
 
