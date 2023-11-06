@@ -3,7 +3,6 @@ package uy.edu.um.proyecto.proyectotic.Servicios.RestServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -13,6 +12,7 @@ import uy.edu.um.proyecto.proyectotic.Servicios.AeropuertosService;
 
 
 import uy.edu.um.AeropuertoTransporte;
+import uy.edu.um.AsociacionTransporte;
 
 @RestController
 
@@ -33,7 +33,11 @@ public class AeropuertoRestService {
     public void eliminarAeropuerto(@RequestBody String id) throws Exception{
         aeropuertoService.eliminarAeropuerto(id);
     }
-
+    @PostMapping("/asociarAerolineasAeropuertos")
+    public void asociarAerolineaAeropuerto(@RequestBody AsociacionTransporte asociacionTransporte ) throws Exception{
+        
+        aeropuertoService.asociarAerolineaAeropuerto(asociacionTransporte.getAerolinea(), asociacionTransporte.getAeropuerto());
+    }
 
 
 }
