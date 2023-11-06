@@ -25,6 +25,7 @@ public class VuelosMapper {
         vuelo.setHoraLlegada(vuelosDTO.getHoraLlegada());
         vuelo.setLicenciaPiloto(vuelosDTO.getLicenciaPiloto());
         vuelo.setNumber(vuelosDTO.getNumber());
+        vuelo.setAerolinea(vuelosDTO.getAerolinea());
     
         return vuelo;
     }
@@ -34,6 +35,7 @@ public class VuelosMapper {
         VuelosDTO vuelosDTO = new VuelosDTO();
        
         vuelosDTO.setCodigoVuelo(vuelo.getCodigoVuelo());
+        vuelosDTO.setAerolinea(vuelo.getAerolinea());
         vuelosDTO.setMatricula(vuelo.getMatricula());
         vuelosDTO.setAeropuertoSalida(vuelo.getAeropuertoSalida());
         vuelosDTO.setAeropuertoLlegada(vuelo.getAeropuertoLlegada());

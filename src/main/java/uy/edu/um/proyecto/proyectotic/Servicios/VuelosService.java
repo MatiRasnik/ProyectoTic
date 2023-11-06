@@ -21,16 +21,17 @@ public class VuelosService {
     VuelosRepository vuelosRepository;
 
     public void crearVuelo(Vuelos vuelo) throws Exception{
-        if(avionesRepositorio.findByMatricula(vuelo.getMatricula())==null || aeropuertoRepository.findByCodigoIATA(vuelo.getAeropuertoSalida())==null || aeropuertoRepository.findByCodigoIATA(vuelo.getAeropuertoLlegada())==null){
+
+        if(avionesRepositorio.findByMatricula(vuelo.getMatricula())==null || aeropuertoRepository.findByCodigoIATA(vuelo.getAeropuertoSalida())==null || aeropuertoRepository.findByCodigoIATA(vuelo.getAeropuertoLlegada())==null || vuelosRepository.findByCodigoVuelo(vuelo.getCodigoVuelo())!=null){
             throw new Exception();
         } else{
+            String[] words = vuelo.getCodigoVuelo().split("-",2);
+            int intValue = Integer.parseInt(words[1]);
+            if(words[0].compareTo(vuelo.getAerolinea())!=0){
 
-            Vuelos savedVuelo = vuelosRepository.save(vuelo);
-            
-            Long numero=savedVuelo.getNumber();
-            String num=numero.toString();
-            savedVuelo.setCodigoVuelo(vuelo.getAerolinea()+num);
-            vuelosRepository.save(savedVuelo);
+                throw new Exception();
+            }
+            vuelosRepository.save(vuelo);
             
         }
     }

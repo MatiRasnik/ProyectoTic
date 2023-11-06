@@ -12,7 +12,6 @@ import uy.edu.um.proyecto.proyectotic.Servicios.VuelosService;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Vuelo.Vuelos;
 
 @RestController
-@RequestMapping("/vuelos")
 public class VuelosRestService {
     @Autowired
     private VuelosMapper vuelosMapper;
@@ -20,9 +19,11 @@ public class VuelosRestService {
     private VuelosService vuelosService;
 
 
-    @PostMapping
+    @PostMapping("/crearVuelo")
     public void crearVuelo(@RequestBody VuelosDTO vuelosDTO) throws Exception{
+        
         Vuelos vuelo = vuelosMapper.toVuelos(vuelosDTO);
+        vuelosService.crearVuelo(vuelo);
     }
 
 }

@@ -26,11 +26,12 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Aviones.Aviones;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Vuelos {
-    private String aerolinea;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long number;
 
+    private String aerolinea;
     private String codigoVuelo;
     private String matricula;
     private String aeropuertoSalida;
