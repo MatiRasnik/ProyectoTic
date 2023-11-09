@@ -1,5 +1,7 @@
 package uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +25,9 @@ public class Aeropuertos {
     private int cantidadPuertas;
     private int cantidadMangas;
     private int cantidadPuestos;
+
+    private List<String> puertas;
+    private List<String> pistas;
 
     // puede tener una lista de las aerolineas que operan en el
 

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface VuelosRepository extends JpaRepository<Vuelos,Long>{
     Vuelos findByCodigoVuelo(String codigoVuelo);
+    List<Vuelos> findByAeropuertoLlegada(String aeropuertoLlegada);
+    List<Vuelos> findByAeropuertoSalida(String aeropuertoLlegada);
     
     
 }
