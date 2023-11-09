@@ -1,5 +1,11 @@
 package uy.edu.um.proyecto.proyectotic.Servicios;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +31,11 @@ public class VuelosService {
         if(avionesRepositorio.findByMatricula(vuelo.getMatricula())==null || aeropuertoRepository.findByCodigoIATA(vuelo.getAeropuertoSalida())==null || aeropuertoRepository.findByCodigoIATA(vuelo.getAeropuertoLlegada())==null || vuelosRepository.findByCodigoVuelo(vuelo.getCodigoVuelo())!=null){
             throw new Exception();
         } else{
+            String horaSalida= vuelo.getHoraSalida();
+            String horaLlegada=vuelo.getHoraSalida();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+            Date timeSalida = dateFormat.parse(horaSalida);
+            Date timeLlegada = dateFormat.parse(horaLlegada);
             String[] words = vuelo.getCodigoVuelo().split("-",2);
             int intValue = Integer.parseInt(words[1]);
             if(words[0].compareTo(vuelo.getAerolinea())!=0){
