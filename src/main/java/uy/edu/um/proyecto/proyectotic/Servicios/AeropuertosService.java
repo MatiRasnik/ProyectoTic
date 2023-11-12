@@ -1,6 +1,16 @@
 package uy.edu.um.proyecto.proyectotic.Servicios;
 
 import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
@@ -10,6 +20,8 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.AerolineasAeropuer
 import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.AerolineasAeropuertosId;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.AerolineasAeropuertosRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Vuelo.Vuelos;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Vuelo.VuelosRepository;
 
 
 @Service
@@ -22,6 +34,8 @@ public class AeropuertosService {
     private UsuariosService usuariosService;
     @Autowired
     private AerolineasAeropuertosRepository aerolineasAeropuertosRepository;
+    @Autowired
+    private VuelosRepository vuelosRepository;
 
     public void crearAeropuerto(Aeropuertos aeropuerto,String mail, String contrasena) throws Exception {
         if(aeropuertoRepository.findByCodigoIATA(aeropuerto.getCodigoIATA())==null){
@@ -58,5 +72,52 @@ public class AeropuertosService {
         } else {
             throw new Exception();
         }
+    }
+
+    public List<String> disponibilidadPuertas(String aeropuerto, LocalDate fecha, String hora) throws ParseException{
+        List<Vuelos> vuelosLlegada= vuelosRepository.findByAeropuertoLlegada(aeropuerto);
+        List<Vuelos> vuelosSalida= vuelosRepository.findByAeropuertoSalida(aeropuerto);
+        List<String> puertasUsadas= new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date time = dateFormat.parse(hora);
+
+        List<Vuelos> vuelosFecha= new ArrayList<>();
+        for(Vuelos vueloSalida: vuelosSalida){
+            if(vueloSalida.getFechaSalida().equals(fecha)){
+                if(colisiones(time, dateFormat.parse(vueloSalida.getHoraSalida()))){
+                    puertasUsadas.add(vueloSalida.getPuertaSalida());
+                }   
+            }
+        }
+        for(Vuelos vueloLlegada: vuelosLlegada){
+            if(vueloLlegada.getFechaLlegada().equals(fecha)){
+                if(colisiones(time, dateFormat.parse(vueloLlegada.getHoraLlegada()))){
+                    puertasUsadas.add(vueloLlegada.getPuertaLlegada());
+                }   
+            }
+        }
+        Aeropuertos aeropuertoObjeto=aeropuertoRepository.findByCodigoIATA(aeropuerto);
+        List<String> puertasDisponibles = new ArrayList<>(aeropuertoObjeto.getPuertas());
+        puertasDisponibles.removeAll(puertasUsadas);
+        return puertasDisponibles;
+        
+        
+    }
+    private Boolean colisiones(Date hora1, Date hora2){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(hora1);
+        calendar.add(Calendar.MINUTE, 30);
+        Date hora1Fin=calendar.getTime();
+        calendar.setTime(hora2);
+        calendar.add(Calendar.MINUTE, 30);
+        Date hora2Fin=calendar.getTime();
+        calendar.setTime(hora1);
+        calendar.add(Calendar.MINUTE, -30);
+        Date hora1Inicio=calendar.getTime();
+        calendar.setTime(hora2);
+        calendar.add(Calendar.MINUTE, -30);
+        Date hora2Inicio=calendar.getTime();
+
+        return hora1Inicio.before(hora2Fin) && hora1Fin.after(hora2Inicio);
     }
 }

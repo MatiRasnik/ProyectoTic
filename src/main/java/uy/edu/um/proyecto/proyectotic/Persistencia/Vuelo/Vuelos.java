@@ -43,6 +43,10 @@ public class Vuelos {
     private String horaSalida;
     private LocalDate fechaLlegada;
     private String horaLlegada;
-    private String licenciaPiloto;     
+    private String licenciaPiloto;
+    private String puertaSalida;
+    private String puertaLlegada;
+    private String pistaSalida;
+    private String pistaLlegada;    
     
 }

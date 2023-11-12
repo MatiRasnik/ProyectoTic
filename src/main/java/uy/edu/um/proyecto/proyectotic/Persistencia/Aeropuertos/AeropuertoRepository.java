@@ -5,4 +5,5 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
 
 public interface AeropuertoRepository extends JpaRepository<Aeropuertos,Long>{
     Aeropuertos findByCodigoIATA(String code);
+    
 }

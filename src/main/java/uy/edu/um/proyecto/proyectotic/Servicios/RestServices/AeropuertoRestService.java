@@ -1,6 +1,7 @@
 package uy.edu.um.proyecto.proyectotic.Servicios.RestServices;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import uy.edu.um.AerolineasDTO;
 import uy.edu.um.AeropuertoTransporte;
 import uy.edu.um.AeropuertosDTO;
 import uy.edu.um.AsociacionTransporte;
+import uy.edu.um.DisponibilidadPuertasT;
 
 @RestController
 
@@ -57,6 +59,16 @@ public class AeropuertoRestService {
             aeropuertosDTOs.add(aeropuertoMapper.toDTO(combo));
         }
         return aeropuertosDTOs;
+    }
+
+    @PostMapping("/puertasDisponibles")
+    public List<String> mangasDisponibles(@RequestBody DisponibilidadPuertasT disponibilidadPuertas) throws Exception {
+
+        String aeropuerto = disponibilidadPuertas.getAeropuerto();
+        String hora = disponibilidadPuertas.getHora();
+        LocalDate fecha = disponibilidadPuertas.getFecha();
+
+        return aeropuertoService.disponibilidadPuertas(aeropuerto, fecha, hora);
     }
 
 }

@@ -18,6 +18,8 @@ public class AeropuertosMapper {
         aeropuerto.setId(aeropuertosDTO.getId());
         aeropuerto.setCantidadMangas(aeropuertosDTO.getCantidadMangas());
         aeropuerto.setCantidadPuestos(aeropuertosDTO.getCantidadPuestos());
+        aeropuerto.setPuertas(aeropuertosDTO.getPuertas());
+        aeropuerto.setPistas(aeropuertosDTO.getPista());
         return aeropuerto;
     }
 
@@ -32,6 +34,8 @@ public class AeropuertosMapper {
         aeropuertosDTO.setId(aeropuertos.getId());
         aeropuertosDTO.setCantidadMangas(aeropuertos.getCantidadMangas());
         aeropuertosDTO.setCantidadPuestos(aeropuertos.getCantidadPuestos());
+        aeropuertosDTO.setPuertas(aeropuertos.getPuertas());
+        aeropuertosDTO.setPista(aeropuertos.getPistas());;
         
         return aeropuertosDTO;
     }

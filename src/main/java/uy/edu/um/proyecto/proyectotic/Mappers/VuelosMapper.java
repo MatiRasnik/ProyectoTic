@@ -26,6 +26,12 @@ public class VuelosMapper {
         vuelo.setLicenciaPiloto(vuelosDTO.getLicenciaPiloto());
         vuelo.setNumber(vuelosDTO.getNumber());
         vuelo.setAerolinea(vuelosDTO.getAerolinea());
+        vuelo.setPuertaLlegada(vuelosDTO.getPuertaLlegada());
+        vuelo.setPuertaSalida(vuelosDTO.getPuertaSalida());
+        vuelo.setPistaLlegada(vuelosDTO.getPistaLlegada());
+        vuelo.setPistaSalida(vuelosDTO.getPistaSalida());
+
+        
     
         return vuelo;
     }
@@ -48,6 +54,10 @@ public class VuelosMapper {
         vuelosDTO.setHoraLlegada(vuelo.getHoraLlegada());
         vuelosDTO.setLicenciaPiloto(vuelo.getLicenciaPiloto());
         vuelosDTO.setNumber(vuelo.getNumber());
+        vuelosDTO.setPuertaLlegada(vuelo.getPuertaLlegada());
+        vuelosDTO.setPuertaSalida(vuelo.getPuertaSalida());
+        vuelosDTO.setPistaSalida(vuelo.getPistaSalida());
+        vuelosDTO.setPistaLlegada(vuelo.getPistaLlegada());
         return vuelosDTO;
     }
 }
