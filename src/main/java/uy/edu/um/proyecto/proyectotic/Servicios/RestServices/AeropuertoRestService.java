@@ -1,17 +1,22 @@
 package uy.edu.um.proyecto.proyectotic.Servicios.RestServices;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import uy.edu.um.proyecto.proyectotic.Mappers.AeropuertosMapper;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.AeropuertoRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.Aeropuertos;
 import uy.edu.um.proyecto.proyectotic.Servicios.AeropuertosService;
-
-
+import uy.edu.um.AerolineasDTO;
 import uy.edu.um.AeropuertoTransporte;
+import uy.edu.um.AeropuertosDTO;
 import uy.edu.um.AsociacionTransporte;
 
 @RestController
@@ -21,23 +26,37 @@ public class AeropuertoRestService {
     private AeropuertosMapper aeropuertoMapper;
     @Autowired
     private AeropuertosService aeropuertoService;
+    @Autowired
+    private AeropuertoRepository aeropuertoRepository;
 
     @PostMapping("/crearAeropuertos")
-    public void crearAeropuerto(@RequestBody AeropuertoTransporte aeropuertoTransporte ) throws Exception{
+    public void crearAeropuerto(@RequestBody AeropuertoTransporte aeropuertoTransporte) throws Exception {
         Aeropuertos aeropuerto = aeropuertoMapper.toAeropuerto(aeropuertoTransporte.getAeropuertosDTO());
-        aeropuertoService.crearAeropuerto(aeropuerto, aeropuertoTransporte.getEmail(), aeropuertoTransporte.getContrasena());
+        aeropuertoService.crearAeropuerto(aeropuerto, aeropuertoTransporte.getEmail(),
+                aeropuertoTransporte.getContrasena());
 
-        
     }
+
     @PostMapping("/eliminarAeropuertos")
-    public void eliminarAeropuerto(@RequestBody String id) throws Exception{
+    public void eliminarAeropuerto(@RequestBody String id) throws Exception {
         aeropuertoService.eliminarAeropuerto(id);
     }
+
     @PostMapping("/asociarAerolineasAeropuertos")
-    public void asociarAerolineaAeropuerto(@RequestBody AsociacionTransporte asociacionTransporte ) throws Exception{
-        
-        aeropuertoService.asociarAerolineaAeropuerto(asociacionTransporte.getAerolinea(), asociacionTransporte.getAeropuerto());
+    public void asociarAerolineaAeropuerto(@RequestBody AsociacionTransporte asociacionTransporte) throws Exception {
+
+        aeropuertoService.asociarAerolineaAeropuerto(asociacionTransporte.getAerolinea(),
+                asociacionTransporte.getAeropuerto());
     }
 
+    @GetMapping("/getAeropuertos")
+    public List<AeropuertosDTO> getAeropuertos() {
+        List<Aeropuertos> aeropuertos = aeropuertoRepository.findAll();
+        List<AeropuertosDTO> aeropuertosDTOs = new ArrayList<>();
+        for (Aeropuertos combo : aeropuertos) {
+            aeropuertosDTOs.add(aeropuertoMapper.toDTO(combo));
+        }
+        return aeropuertosDTOs;
+    }
 
 }

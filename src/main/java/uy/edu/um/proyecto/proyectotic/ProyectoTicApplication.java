@@ -1,6 +1,5 @@
 package uy.edu.um.proyecto.proyectotic;
 
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javafx.application.Application;

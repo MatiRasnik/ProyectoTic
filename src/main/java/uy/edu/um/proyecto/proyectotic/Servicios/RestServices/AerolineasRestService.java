@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import uy.edu.um.AsociacionTransporte;
 import uy.edu.um.AerolineaTransporte;
+import uy.edu.um.AerolineasDTO;
 import uy.edu.um.proyecto.proyectotic.Mappers.AerolineasMapper;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.AerolineaRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.AerolineasAeropuertos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.AerolineasAeropuertosRepository;
@@ -27,30 +29,46 @@ public class AerolineasRestService {
     @Autowired
     private AerolineasService aerolineasService;
     @Autowired
+    private AerolineaRepository aerolineaRepository;
+    @Autowired
     private AerolineasAeropuertosRepository aerolineasAeropuertosRepository;
 
     @PostMapping("/crearAerolineas")
-    public void crearAerolineas(@RequestBody AerolineaTransporte aerolineaTransporte) throws Exception{
+    public void crearAerolineas(@RequestBody AerolineaTransporte aerolineaTransporte) throws Exception {
         Aerolineas aerolinea = aerolineasMapper.toAerolineas(aerolineaTransporte.getAerolineasDTO());
-        aerolineasService.crearAereolinea(aerolinea, aerolineaTransporte.getEmail(), aerolineaTransporte.getContrasena());
+        aerolineasService.crearAereolinea(aerolinea, aerolineaTransporte.getEmail(),
+                aerolineaTransporte.getContrasena());
 
     }
+
     @PostMapping("/eliminarAerolineas")
-    public void eliminarAerolineas(@RequestBody String id) throws Exception{
+    public void eliminarAerolineas(@RequestBody String id) throws Exception {
         aerolineasService.eliminarAerolinea(id);
     }
+
     @GetMapping("/getAeropuertosAsociados/{id}")
-    public List<String> getAeropuertos(@PathVariable("id") String aerolinea){
-        List<AerolineasAeropuertos> aerolineasAeropuertos= aerolineasAeropuertosRepository.findByIdAerolinea(aerolinea);
-        List<String> aeropuertos=new ArrayList<>();
+    public List<String> getAeropuertos(@PathVariable("id") String aerolinea) {
+        List<AerolineasAeropuertos> aerolineasAeropuertos = aerolineasAeropuertosRepository
+                .findByIdAerolinea(aerolinea);
+        List<String> aeropuertos = new ArrayList<>();
 
         for (AerolineasAeropuertos combo : aerolineasAeropuertos) {
             aeropuertos.add(combo.getId().getAeropuerto());
-            
+
         }
 
         return aeropuertos;
 
+    }
+
+    @GetMapping("/getAerolineas")
+    public List<AerolineasDTO> getAerolineas() {
+        List<Aerolineas> aerolineas = aerolineaRepository.findAll();
+        List<AerolineasDTO> aerolineasDTOs = new ArrayList<>();
+        for (Aerolineas combo : aerolineas) {
+            aerolineasDTOs.add(aerolineasMapper.toDTO(combo));
+        }
+        return aerolineasDTOs;
     }
 
 }
