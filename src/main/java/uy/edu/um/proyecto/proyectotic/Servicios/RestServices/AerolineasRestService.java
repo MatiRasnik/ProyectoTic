@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import uy.edu.um.AsociacionTransporte;
+import uy.edu.um.VuelosDTO;
 import uy.edu.um.AerolineaTransporte;
 import uy.edu.um.AerolineasDTO;
 import uy.edu.um.proyecto.proyectotic.Mappers.AerolineasMapper;
@@ -20,6 +21,7 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.AerolineaRepositor
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.AerolineasAeropuertos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.AerolineasAeropuertosRepository;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Vuelo.Vuelos;
 import uy.edu.um.proyecto.proyectotic.Servicios.AerolineasService;
 
 @RestController
@@ -69,6 +71,20 @@ public class AerolineasRestService {
             aerolineasDTOs.add(aerolineasMapper.toDTO(combo));
         }
         return aerolineasDTOs;
+    }
+
+    @GetMapping("/getAerolineasAeropuerto/{empresa}")
+    public List<String> getAerolineasAeropuerto(@PathVariable("empresa") String empresa) {
+        List<AerolineasAeropuertos> aerolineasAerolineas = aerolineasAeropuertosRepository.findByIdAeropuerto(empresa);
+        List<String> aerolineas = new ArrayList<>();
+
+        for (AerolineasAeropuertos combo : aerolineasAerolineas) {
+            aerolineas.add(combo.getId().getAeropuerto());
+
+        }
+
+        return aerolineas;
+
     }
 
 }

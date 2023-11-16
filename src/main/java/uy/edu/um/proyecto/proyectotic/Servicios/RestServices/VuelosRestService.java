@@ -39,19 +39,25 @@ public class VuelosRestService {
     public List<VuelosDTO> getVuelos(@PathVariable("empresa") String nombreEmpresa) {
         List<Vuelos> vuelosSalida = vuelosRepository.findByAeropuertoSalida(nombreEmpresa);
         List<Vuelos> vuelosLlegada = vuelosRepository.findByAeropuertoLlegada(nombreEmpresa);
+        List<VuelosDTO> vuelosDTOs = new ArrayList<>();
+        for (Vuelos vuelo : vuelosSalida) {
+            vuelosDTOs.add(vuelosMapper.toDTO(vuelo));
+        }
+        for (Vuelos vuelo : vuelosLlegada) {
+            vuelosDTOs.add(vuelosMapper.toDTO(vuelo));
+        }
+        return vuelosDTOs;
+    }
 
-        System.out.println(nombreEmpresa);
-        System.out.println(vuelosLlegada);
-        System.out.println(vuelosSalida);
+    @GetMapping("/getVuelosAerolinea/{empresa}")
+    public List<VuelosDTO> getVuelosAerolinea(@PathVariable("empresa") String nombreEmpresa) {
+        List<Vuelos> vuelos = vuelosRepository.findByAerolinea(nombreEmpresa);
 
         List<VuelosDTO> vuelosDTOs = new ArrayList<>();
-        for (Vuelos avion : vuelosSalida) {
-            vuelosDTOs.add(vuelosMapper.toDTO(avion));
+        for (Vuelos vuelo : vuelos) {
+            vuelosDTOs.add(vuelosMapper.toDTO(vuelo));
         }
-        for (Vuelos avion : vuelosLlegada) {
-            vuelosDTOs.add(vuelosMapper.toDTO(avion));
-        }
-        System.out.println(vuelosDTOs);
+
         return vuelosDTOs;
     }
 
