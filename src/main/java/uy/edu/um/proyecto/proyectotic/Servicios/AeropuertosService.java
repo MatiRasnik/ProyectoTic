@@ -84,14 +84,14 @@ public class AeropuertosService {
         List<Vuelos> vuelosFecha = new ArrayList<>();
         for (Vuelos vueloSalida : vuelosSalida) {
             if (vueloSalida.getFechaSalida().equals(fecha)) {
-                if (colisiones(time, dateFormat.parse(vueloSalida.getHoraSalida()))) {
+                if (colisiones(time, dateFormat.parse(vueloSalida.getHoraSalida()), 30)) {
                     puertasUsadas.add(vueloSalida.getPuertaSalida());
                 }
             }
         }
         for (Vuelos vueloLlegada : vuelosLlegada) {
             if (vueloLlegada.getFechaLlegada().equals(fecha)) {
-                if (colisiones(time, dateFormat.parse(vueloLlegada.getHoraLlegada()))) {
+                if (colisiones(time, dateFormat.parse(vueloLlegada.getHoraLlegada()), 30)) {
                     puertasUsadas.add(vueloLlegada.getPuertaLlegada());
                 }
             }

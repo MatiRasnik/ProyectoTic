@@ -11,15 +11,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import uy.edu.um.proyecto.proyectotic.Mappers.AeropuertosMapper;
-import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.AeropuertoRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.Aeropuertos;
 import uy.edu.um.proyecto.proyectotic.Servicios.AeropuertosService;
-import uy.edu.um.AerolineasDTO;
 import uy.edu.um.AeropuertoTransporte;
 import uy.edu.um.AeropuertosDTO;
 import uy.edu.um.AsociacionTransporte;
 import uy.edu.um.DisponibilidadPuertasT;
+import uy.edu.um.PuertasPistasTransporte;
 
 @RestController
 
@@ -71,8 +70,6 @@ public class AeropuertoRestService {
         return aeropuertoService.disponibilidadPuertas(aeropuerto, fecha, hora);
     }
 
-    <<<<<<<HEAD=======
-
     @PostMapping("/pistasDisponibles")
     public List<String> pistasDisponbles(@RequestBody DisponibilidadPuertasT disponibilidadPuertas) throws Exception {
 
@@ -90,10 +87,8 @@ public class AeropuertoRestService {
     }
 
     @PostMapping("/crearPistas")
-    public void crearPistas(@RequestBody PuertasPistasTransporte puertasPistasTransporte) throws Exception{
+    public void crearPistas(@RequestBody PuertasPistasTransporte puertasPistasTransporte) throws Exception {
         aeropuertoService.crearPistas(puertasPistasTransporte.getAeropuerto(), puertasPistasTransporte.getLista());
 
     }
-
-    >>>>>>>4 bb84f191c1e0808da8c5c89a6584baf4087023b
 }
