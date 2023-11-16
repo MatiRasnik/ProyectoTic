@@ -143,12 +143,24 @@ public class AeropuertosService {
             aeropuertoObjeto.setPuertas(listaPuertas);
 
         }
-        aeropuertoRepository.save(aeropuertoObjeto);
-        
-
-        
+        aeropuertoRepository.save(aeropuertoObjeto);   
 
     }
+    public void crearPistas(String aeropuerto, List<String> listaPistas){
+        Aeropuertos aeropuertoObjeto=aeropuertoRepository.findByCodigoIATA(aeropuerto);
+        if(aeropuertoObjeto.getPistas()!=null){
+            List<String> pistasDisponibles = new ArrayList<>(aeropuertoObjeto.getPistas());
+            pistasDisponibles.removeAll(listaPistas);
+            pistasDisponibles.addAll(listaPistas);
+            aeropuertoObjeto.setPistas(pistasDisponibles);
+        } else {
+            aeropuertoObjeto.setPistas(listaPistas);
+
+        }
+        aeropuertoRepository.save(aeropuertoObjeto);   
+
+    }
+
     private Boolean colisiones(Date hora1, Date hora2, int rango){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(hora1);

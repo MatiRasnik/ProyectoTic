@@ -87,6 +87,11 @@ public class AeropuertoRestService {
         aeropuertoService.crearPuertas(puertasPistasTransporte.getAeropuerto(), puertasPistasTransporte.getLista());
 
     }
+    @PostMapping("/crearPistas")
+    public void crearPistas(@RequestBody PuertasPistasTransporte puertasPistasTransporte) throws Exception{
+        aeropuertoService.crearPistas(puertasPistasTransporte.getAeropuerto(), puertasPistasTransporte.getLista());
+
+    }
 
 
 
