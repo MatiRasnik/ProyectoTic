@@ -71,4 +71,29 @@ public class AeropuertoRestService {
         return aeropuertoService.disponibilidadPuertas(aeropuerto, fecha, hora);
     }
 
+    <<<<<<<HEAD=======
+
+    @PostMapping("/pistasDisponibles")
+    public List<String> pistasDisponbles(@RequestBody DisponibilidadPuertasT disponibilidadPuertas) throws Exception {
+
+        String aeropuerto = disponibilidadPuertas.getAeropuerto();
+        String hora = disponibilidadPuertas.getHora();
+        LocalDate fecha = disponibilidadPuertas.getFecha();
+
+        return aeropuertoService.disponibilidadPistas(aeropuerto, fecha, hora);
+    }
+
+    @PostMapping("/crearPuertas")
+    public void crearPuertas(@RequestBody PuertasPistasTransporte puertasPistasTransporte) throws Exception {
+        aeropuertoService.crearPuertas(puertasPistasTransporte.getAeropuerto(), puertasPistasTransporte.getLista());
+
+    }
+
+    @PostMapping("/crearPistas")
+    public void crearPistas(@RequestBody PuertasPistasTransporte puertasPistasTransporte) throws Exception{
+        aeropuertoService.crearPistas(puertasPistasTransporte.getAeropuerto(), puertasPistasTransporte.getLista());
+
+    }
+
+    >>>>>>>4 bb84f191c1e0808da8c5c89a6584baf4087023b
 }
