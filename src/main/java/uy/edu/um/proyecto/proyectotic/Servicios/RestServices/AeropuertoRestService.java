@@ -20,7 +20,6 @@ import uy.edu.um.AeropuertoTransporte;
 import uy.edu.um.AeropuertosDTO;
 import uy.edu.um.AsociacionTransporte;
 import uy.edu.um.DisponibilidadPuertasT;
-import uy.edu.um.PuertasPistasTransporte;
 
 @RestController
 
@@ -63,7 +62,7 @@ public class AeropuertoRestService {
     }
 
     @PostMapping("/puertasDisponibles")
-    public List<String> puertasDisponibles(@RequestBody DisponibilidadPuertasT disponibilidadPuertas) throws Exception {
+    public List<String> mangasDisponibles(@RequestBody DisponibilidadPuertasT disponibilidadPuertas) throws Exception {
 
         String aeropuerto = disponibilidadPuertas.getAeropuerto();
         String hora = disponibilidadPuertas.getHora();
@@ -71,23 +70,5 @@ public class AeropuertoRestService {
 
         return aeropuertoService.disponibilidadPuertas(aeropuerto, fecha, hora);
     }
-
-    @PostMapping("/pistasDisponibles")
-    public List<String> pistasDisponbles(@RequestBody DisponibilidadPuertasT disponibilidadPuertas) throws Exception {
-
-        String aeropuerto = disponibilidadPuertas.getAeropuerto();
-        String hora = disponibilidadPuertas.getHora();
-        LocalDate fecha = disponibilidadPuertas.getFecha();
-
-        return aeropuertoService.disponibilidadPistas(aeropuerto, fecha, hora);
-    }
-
-    @PostMapping("/crearPuertas")
-    public void crearPuertas(@RequestBody PuertasPistasTransporte puertasPistasTransporte) throws Exception{
-        aeropuertoService.crearPuertas(puertasPistasTransporte.getAeropuerto(), puertasPistasTransporte.getLista());
-
-    }
-
-
 
 }

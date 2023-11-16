@@ -84,14 +84,14 @@ public class AeropuertosService {
         List<Vuelos> vuelosFecha= new ArrayList<>();
         for(Vuelos vueloSalida: vuelosSalida){
             if(vueloSalida.getFechaSalida().equals(fecha)){
-                if(colisiones(time, dateFormat.parse(vueloSalida.getHoraSalida()), 30)){
+                if(colisiones(time, dateFormat.parse(vueloSalida.getHoraSalida()))){
                     puertasUsadas.add(vueloSalida.getPuertaSalida());
                 }   
             }
         }
         for(Vuelos vueloLlegada: vuelosLlegada){
             if(vueloLlegada.getFechaLlegada().equals(fecha)){
-                if(colisiones(time, dateFormat.parse(vueloLlegada.getHoraLlegada()), 30)){
+                if(colisiones(time, dateFormat.parse(vueloLlegada.getHoraLlegada()))){
                     puertasUsadas.add(vueloLlegada.getPuertaLlegada());
                 }   
             }
@@ -103,65 +103,19 @@ public class AeropuertosService {
         
         
     }
-    public List<String> disponibilidadPistas(String aeropuerto, LocalDate fecha, String hora) throws ParseException{
-        List<Vuelos> vuelosLlegada= vuelosRepository.findByAeropuertoLlegada(aeropuerto);
-        List<Vuelos> vuelosSalida= vuelosRepository.findByAeropuertoSalida(aeropuerto);
-        List<String> pistasUsadas= new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        Date time = dateFormat.parse(hora);
-
-        List<Vuelos> vuelosFecha= new ArrayList<>();
-        for(Vuelos vueloSalida: vuelosSalida){
-            if(vueloSalida.getFechaSalida().equals(fecha)){
-                if(colisiones(time, dateFormat.parse(vueloSalida.getHoraSalida()), 15)){
-                    pistasUsadas.add(vueloSalida.getPistaSalida());
-                }   
-            }
-        }
-        for(Vuelos vueloLlegada: vuelosLlegada){
-            if(vueloLlegada.getFechaLlegada().equals(fecha)){
-                if(colisiones(time, dateFormat.parse(vueloLlegada.getHoraLlegada()), 15)){
-                    pistasUsadas.add(vueloLlegada.getPistaLlegada());
-                }   
-            }
-        }
-        Aeropuertos aeropuertoObjeto=aeropuertoRepository.findByCodigoIATA(aeropuerto);
-        List<String> pistasDisponbles = new ArrayList<>(aeropuertoObjeto.getPistas());
-        pistasDisponbles.removeAll(pistasUsadas);
-        return pistasDisponbles;
-        
-        
-    }
-    public void crearPuertas(String aeropuerto, List<String> listaPuertas){
-        Aeropuertos aeropuertoObjeto=aeropuertoRepository.findByCodigoIATA(aeropuerto);
-        if(aeropuertoObjeto.getPuertas()!=null){
-            List<String> puertasDisponibles = new ArrayList<>(aeropuertoObjeto.getPuertas());
-            puertasDisponibles.removeAll(listaPuertas);
-            puertasDisponibles.addAll(listaPuertas);
-            aeropuertoObjeto.setPuertas(puertasDisponibles);
-        } else {
-            aeropuertoObjeto.setPuertas(listaPuertas);
-
-        }
-        aeropuertoRepository.save(aeropuertoObjeto);
-        
-
-        
-
-    }
-    private Boolean colisiones(Date hora1, Date hora2, int rango){
+    private Boolean colisiones(Date hora1, Date hora2){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(hora1);
-        calendar.add(Calendar.MINUTE, rango);
+        calendar.add(Calendar.MINUTE, 30);
         Date hora1Fin=calendar.getTime();
         calendar.setTime(hora2);
-        calendar.add(Calendar.MINUTE, rango);
+        calendar.add(Calendar.MINUTE, 30);
         Date hora2Fin=calendar.getTime();
         calendar.setTime(hora1);
-        calendar.add(Calendar.MINUTE, -rango);
+        calendar.add(Calendar.MINUTE, -30);
         Date hora1Inicio=calendar.getTime();
         calendar.setTime(hora2);
-        calendar.add(Calendar.MINUTE, -rango);
+        calendar.add(Calendar.MINUTE, -30);
         Date hora2Inicio=calendar.getTime();
 
         return hora1Inicio.before(hora2Fin) && hora1Fin.after(hora2Inicio);
