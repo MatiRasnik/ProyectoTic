@@ -61,6 +61,21 @@ public class AeropuertosService {
         }
     }
 
+    public void aceptarVuelo(String codigoVuelo,String aeropuerto, String puerta, String pista){
+        Vuelos vuelo=vuelosRepository.findByCodigoVuelo(codigoVuelo);
+        if(vuelo.getAeropuertoLlegada().equals(aeropuerto)){
+            vuelo.setEstadoAceptacionLlegada(true);
+            vuelo.setPistaLlegada(pista);
+            vuelo.setPuertaLlegada(puerta);
+
+        } else {
+            vuelo.setEstadoAceptacionSalida(true);
+            vuelo.setPistaSalida(pista);
+            vuelo.setPuertaSalida(puerta);
+
+        }
+    }
+
     public void asociarAerolineaAeropuerto(String aerolinea, String aeropuerto) throws Exception {
         AerolineasAeropuertos asociacion = new AerolineasAeropuertos();
         AerolineasAeropuertosId id = new AerolineasAeropuertosId();

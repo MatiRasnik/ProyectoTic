@@ -91,4 +91,7 @@ public class AeropuertoRestService {
         aeropuertoService.crearPistas(puertasPistasTransporte.getAeropuerto(), puertasPistasTransporte.getLista());
 
     }
+
+    //@PostMapping("/aceptarVuelo")
+    //public void aceptarVuelo(@RequestBody AceptacionVuelosT )
 }
