@@ -9,4 +9,6 @@ import org.springframework.data.repository.query.Param;
 public interface AerolineaRepository extends JpaRepository<Aerolineas, Long> {
     // @Query("SELECT a FROM aerolineas a WHERE a.codigo= ?1")
     Aerolineas findByCodigo(String code);
+
+    Aerolineas findByNombre(String aerolinea);
 }

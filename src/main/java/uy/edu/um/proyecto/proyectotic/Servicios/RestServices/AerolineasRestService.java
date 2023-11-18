@@ -74,17 +74,20 @@ public class AerolineasRestService {
     }
 
     @GetMapping("/getAerolineasAeropuerto/{empresa}")
-    public List<String> getAerolineasAeropuerto(@PathVariable("empresa") String empresa) {
+    public List<AerolineasDTO> getAerolineasAeropuerto(@PathVariable("empresa") String empresa) {
         List<AerolineasAeropuertos> aerolineasAerolineas = aerolineasAeropuertosRepository.findByIdAeropuerto(empresa);
-        List<String> aerolineas = new ArrayList<>();
+        System.out.println(aerolineasAerolineas.size());
+        System.out.println(aerolineasAerolineas.get(0).getId().getAerolinea());
+        List<AerolineasDTO> aerolineasDTOs = new ArrayList<>();
 
         for (AerolineasAeropuertos combo : aerolineasAerolineas) {
-            aerolineas.add(combo.getId().getAeropuerto());
-
+            System.out.println(combo.getId().getAerolinea());
+            Aerolineas aerolinea = aerolineaRepository.findByNombre(combo.getId().getAerolinea());
+            aerolineasDTOs.add(aerolineasMapper.toDTO(aerolinea));
         }
-
-        return aerolineas;
-
+        System.out.println(aerolineasDTOs.size());
+        System.out.println(aerolineasDTOs.get(0).getNombre());
+        return aerolineasDTOs;
     }
 
 }
