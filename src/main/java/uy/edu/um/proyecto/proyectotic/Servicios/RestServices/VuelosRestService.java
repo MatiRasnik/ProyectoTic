@@ -37,13 +37,10 @@ public class VuelosRestService {
 
     @GetMapping("/getVuelos/{empresa}")
     public List<VuelosDTO> getVuelos(@PathVariable("empresa") String nombreEmpresa) {
-        List<Vuelos> vuelosSalida = vuelosRepository.findByAeropuertoSalida(nombreEmpresa);
-        List<Vuelos> vuelosLlegada = vuelosRepository.findByAeropuertoLlegada(nombreEmpresa);
+
+        List<Vuelos> vuelos = vuelosRepository.findVuelos(nombreEmpresa);
         List<VuelosDTO> vuelosDTOs = new ArrayList<>();
-        for (Vuelos vuelo : vuelosSalida) {
-            vuelosDTOs.add(vuelosMapper.toDTO(vuelo));
-        }
-        for (Vuelos vuelo : vuelosLlegada) {
+        for (Vuelos vuelo : vuelos) {
             vuelosDTOs.add(vuelosMapper.toDTO(vuelo));
         }
         return vuelosDTOs;
@@ -52,6 +49,16 @@ public class VuelosRestService {
     @GetMapping("/getVuelosAerolinea/{empresa}")
     public List<VuelosDTO> getVuelosAerolinea(@PathVariable("empresa") String nombreEmpresa) {
         List<Vuelos> vuelos = vuelosRepository.findByAerolinea(nombreEmpresa);
+        List<VuelosDTO> vuelosDTOs = new ArrayList<>();
+        for (Vuelos vuelo : vuelos) {
+            vuelosDTOs.add(vuelosMapper.toDTO(vuelo));
+        }
+        return vuelosDTOs;
+    }
+
+    @GetMapping("/getAllVuelosAeropuerto/{empresa}")
+    public List<VuelosDTO> getAllVuelosAeropuerto(@PathVariable("empresa") String nombreEmpresa) {
+        List<Vuelos> vuelos = vuelosRepository.findVuelosAeropuerto(nombreEmpresa);
 
         List<VuelosDTO> vuelosDTOs = new ArrayList<>();
         for (Vuelos vuelo : vuelos) {
