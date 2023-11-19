@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import uy.edu.um.AvionesDTO;
+import uy.edu.um.OrigenDestino;
 import uy.edu.um.VuelosDTO;
 import uy.edu.um.proyecto.proyectotic.Mappers.VuelosMapper;
 import uy.edu.um.proyecto.proyectotic.Servicios.VuelosService;
@@ -27,6 +28,7 @@ public class VuelosRestService {
     private VuelosService vuelosService;
     @Autowired
     private VuelosRepository vuelosRepository;
+    
 
     @PostMapping("/crearVuelo")
     public void crearVuelo(@RequestBody VuelosDTO vuelosDTO) throws Exception {
@@ -77,6 +79,15 @@ public class VuelosRestService {
         }
 
         return vuelosDTOs;
+    }
+    @PostMapping("/vuelosDisponibles")
+    public List<VuelosDTO> vuelosDisponibles(@RequestBody OrigenDestino origenDestino){
+        List<Vuelos> vuelosOrigenDestino= vuelosService.vuelosDisponibles(origenDestino.getOrigen(), origenDestino.getDestino());
+        List<VuelosDTO> vuelosDisponiblesDTO=new ArrayList<>();
+        for (Vuelos vuelos : vuelosOrigenDestino) {
+            vuelosDisponiblesDTO.add(vuelosMapper.toDTO(vuelos));
+        }
+        return vuelosDisponiblesDTO;
     }
 
     

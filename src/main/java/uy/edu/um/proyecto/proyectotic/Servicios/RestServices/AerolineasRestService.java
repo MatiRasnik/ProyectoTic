@@ -96,4 +96,10 @@ public class AerolineasRestService {
         aerolineasService.asignarVueloPasajero(pasajerosVuelosT.getCodigoVuelo(), pasajerosVuelosT.getPasaporte());
     }
 
+    @PostMapping("/vuelosComprados")
+    public List<VuelosDTO> vuelosComprados(@RequestBody String pasaporte) throws Exception{
+        return aerolineasService.vuelosPasajero(pasaporte);
+
+    }
+
 }

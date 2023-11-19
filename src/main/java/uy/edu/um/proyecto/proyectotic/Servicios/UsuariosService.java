@@ -79,4 +79,12 @@ public class UsuariosService {
             }
         }
     }
+    public Clientes buscarClienteEmail(String email) throws Exception{
+        Clientes cliente=clientesRepository.findByEmail(email);
+        if(cliente==null){
+            throw new Exception();
+        }
+        return cliente;
+
+    }
 }

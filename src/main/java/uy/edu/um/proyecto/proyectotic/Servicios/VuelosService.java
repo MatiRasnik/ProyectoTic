@@ -15,6 +15,8 @@ import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.AeropuertoReposit
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.Aeropuertos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aviones.AvionesRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.PilotosRepository;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.PasajerosVuelos;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.PasajerosVuelosRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Vuelo.Vuelos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Vuelo.VuelosRepository;
 
@@ -28,6 +30,8 @@ public class VuelosService {
     PilotosRepository pilotosRepository;
     @Autowired
     VuelosRepository vuelosRepository;
+    @Autowired
+    PasajerosVuelosRepository pasajerosVuelosRepository;
 
     public void crearVuelo(Vuelos vuelo) throws Exception{
 
@@ -64,12 +68,13 @@ public class VuelosService {
         }
         for (String salidaIata : iataLlegada) {
             for (String llegadaIata : iataSalida) {
-                vuelosTotales.addAll(vuelosRepository.findByAeropuertoLlegadaAndAeropuertoSalida(salidaIata, llegadaIata));
+                vuelosTotales.addAll(vuelosRepository.findAeropuertoLlegadaAndAeropuertoSalida(salidaIata, llegadaIata));
                 
             }
             
         }
         return vuelosTotales;
     }
+
     
 }

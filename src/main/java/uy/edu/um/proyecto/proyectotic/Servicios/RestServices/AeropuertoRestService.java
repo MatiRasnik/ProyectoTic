@@ -103,4 +103,9 @@ public class AeropuertoRestService {
         aeropuertoService.denegarVuelo(aceptacionVuelosT.getCodigoVuelo(), aceptacionVuelosT.getAeropuerto());
 
     }
+
+    @GetMapping("/paisesDisponibles")
+    public List<String> paisesDisponibles()throws Exception{
+        return aeropuertoRepository.paisesAeropuertos();
+    }
 }

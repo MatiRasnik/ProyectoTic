@@ -69,9 +69,9 @@ public class AerolineasService {
 
     public List<VuelosDTO> vuelosPasajero(String pasaporte) throws Exception{
         List<VuelosDTO> vuelosDePasajero=new ArrayList<>();
-        List<String> vuelos=pasajerosVuelosRepository.findByIdPasaporte(pasaporte);
-        for (String vuelo : vuelos) {
-            vuelosDePasajero.add(vuelosMapper.toDTO(vuelosRepository.findByCodigoVuelo(vuelo)));
+        List<PasajerosVuelos> vuelos=pasajerosVuelosRepository.findByIdPasaporte(pasaporte);
+        for (PasajerosVuelos vuelo : vuelos) {
+            vuelosDePasajero.add(vuelosMapper.toDTO(vuelosRepository.findByCodigoVuelo(vuelo.getId().getCodigoVuelo())));
         }
         return vuelosDePasajero;
     }
