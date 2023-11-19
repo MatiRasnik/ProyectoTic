@@ -14,7 +14,7 @@ public interface VuelosRepository extends JpaRepository<Vuelos, Long> {
 
     List<Vuelos> findByAerolinea(String nombreEmpresa);
 
-    @Query("SELECT v FROM Vuelos v WHERE (v.aeropuertoLlegada =?1 AND v.estadoAceptacionLlegada = FALSE) OR (v.aeropuertoSalida =?1 AND v.estadoAceptacionSalida = FALSE)")
+    @Query("SELECT v FROM Vuelos v WHERE (v.aeropuertoLlegada =?1 AND v.estadoAceptacionLlegada = null) OR (v.aeropuertoSalida =?1 AND v.estadoAceptacionSalida = null)")
     List<Vuelos> findVuelos(String email);
 
     @Query("SELECT v FROM Vuelos v WHERE v.aeropuertoLlegada =?1 OR v.aeropuertoSalida =?1")

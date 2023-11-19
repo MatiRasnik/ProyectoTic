@@ -77,6 +77,7 @@ public class AeropuertosService {
             vuelo.setPuertaSalida(puerta);
 
         }
+        vuelosRepository.save(vuelo);
     }
     public void denegarVuelo(String codigoVuelo,String aeropuerto){
         Vuelos vuelo=vuelosRepository.findByCodigoVuelo(codigoVuelo);
@@ -85,6 +86,7 @@ public class AeropuertosService {
         } else {
             vuelo.setEstadoAceptacionSalida(false);
         }
+        vuelosRepository.save(vuelo);
     }
 
     public void asociarAerolineaAeropuerto(String aerolinea, String aeropuerto) throws Exception {
