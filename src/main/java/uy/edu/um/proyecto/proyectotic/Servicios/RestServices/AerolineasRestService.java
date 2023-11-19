@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import uy.edu.um.AsociacionTransporte;
+import uy.edu.um.PasajerosVuelosT;
 import uy.edu.um.VuelosDTO;
 import uy.edu.um.AerolineaTransporte;
 import uy.edu.um.AerolineasDTO;
@@ -88,6 +89,11 @@ public class AerolineasRestService {
         System.out.println(aerolineasDTOs.size());
         System.out.println(aerolineasDTOs.get(0).getNombre());
         return aerolineasDTOs;
+    }
+
+    @PostMapping("/asignarVueloPasajero")
+    public void asignarVueloPasajero(@RequestBody PasajerosVuelosT pasajerosVuelosT) throws Exception {
+        aerolineasService.asignarVueloPasajero(pasajerosVuelosT.getCodigoVuelo(), pasajerosVuelosT.getPasaporte());
     }
 
 }
