@@ -14,6 +14,7 @@ import uy.edu.um.proyecto.proyectotic.Mappers.AeropuertosMapper;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.AeropuertoRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.Aeropuertos;
 import uy.edu.um.proyecto.proyectotic.Servicios.AeropuertosService;
+import uy.edu.um.AceptacionVuelosT;
 import uy.edu.um.AeropuertoTransporte;
 import uy.edu.um.AeropuertosDTO;
 import uy.edu.um.AsociacionTransporte;
@@ -92,6 +93,14 @@ public class AeropuertoRestService {
 
     }
 
-    //@PostMapping("/aceptarVuelo")
-    //public void aceptarVuelo(@RequestBody AceptacionVuelosT )
+    @PostMapping("/aceptarVuelos")
+    public void aceptarVuelo(@RequestBody AceptacionVuelosT aceptacionVuelosT)throws Exception{
+        aeropuertoService.aceptarVuelo(aceptacionVuelosT.getCodigoVuelo(), aceptacionVuelosT.getAeropuerto(), aceptacionVuelosT.getPuerta(), aceptacionVuelosT.getPista());
+
+    }
+    @PostMapping("/denegarVuelos")
+    public void debegarVuelo(@RequestBody AceptacionVuelosT aceptacionVuelosT)throws Exception{
+        aeropuertoService.denegarVuelo(aceptacionVuelosT.getCodigoVuelo(), aceptacionVuelosT.getAeropuerto());
+
+    }
 }

@@ -1,4 +1,6 @@
-package uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos;
+package uy.edu.um.proyecto.proyectotic.Persistencia.Clientes;
+
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,16 +10,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 @Entity
-@Table(name="piloto")
+@Table(name="cliente")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pilotos {
+
+public class Clientes {
 
     @Id
-    private String licenciaPiloto;
-    
+    private String pasaporte;
+    private LocalDate fechaNacimiento;
     private String email;
     
 }

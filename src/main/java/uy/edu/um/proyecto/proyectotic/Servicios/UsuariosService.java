@@ -3,7 +3,10 @@ package uy.edu.um.proyecto.proyectotic.Servicios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.Aeropuertos;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Clientes.Clientes;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Clientes.ClientesRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.Pilotos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.PilotosRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
@@ -15,7 +18,8 @@ public class UsuariosService {
     private UsuariosRepository usuariosRepository;
     @Autowired
     private PilotosRepository pilotosRepository;
-
+    @Autowired
+    private ClientesRepository clientesRepository;
     
 
     public boolean verificarLogin(String email,String contrasena){
@@ -56,6 +60,23 @@ public class UsuariosService {
             throw new Exception();
         } else {
             usuariosRepository.delete(usr);
+        }
+    }
+    public Clientes getClientePasaporte(String pasaporte){
+        Clientes cliente = clientesRepository.findByPasaporte(pasaporte);
+        return cliente;
+    }
+    @Transactional
+    public void registroUsuarioCliente(Usuarios usuario, Clientes cliente) throws Exception{
+        if (getUsuarioId(usuario.getEmail())!=null || getClientePasaporte(cliente.getPasaporte()) != null){
+            throw new Exception();
+        } else {
+            try {
+                usuariosRepository.save(usuario);
+                clientesRepository.save(cliente);
+            } catch (Exception e) {
+                throw new Exception();
+            }
         }
     }
 }

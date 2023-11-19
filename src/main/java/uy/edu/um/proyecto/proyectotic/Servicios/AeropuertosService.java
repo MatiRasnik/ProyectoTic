@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.AerolineaRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.AeropuertoRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.Aeropuertos;
@@ -28,6 +29,8 @@ public class AeropuertosService {
 
     @Autowired
     private AeropuertoRepository aeropuertoRepository;
+    @Autowired
+    private AerolineaRepository aerolineaRepository;
     @Autowired
     private UsuariosService usuariosService;
     @Autowired
@@ -75,6 +78,14 @@ public class AeropuertosService {
 
         }
     }
+    public void denegarVuelo(String codigoVuelo,String aeropuerto){
+        Vuelos vuelo=vuelosRepository.findByCodigoVuelo(codigoVuelo);
+        if(vuelo.getAeropuertoLlegada().equals(aeropuerto)){
+            vuelo.setEstadoAceptacionLlegada(false);
+        } else {
+            vuelo.setEstadoAceptacionSalida(false);
+        }
+    }
 
     public void asociarAerolineaAeropuerto(String aerolinea, String aeropuerto) throws Exception {
         AerolineasAeropuertos asociacion = new AerolineasAeropuertos();
@@ -82,7 +93,8 @@ public class AeropuertosService {
         id.setAerolinea(aerolinea);
         id.setAeropuerto(aeropuerto);
         asociacion.setId(id);
-        if (aerolineasAeropuertosRepository.findByIdAerolineaAndIdAeropuerto(aerolinea, aeropuerto) == null) {
+        
+        if (aerolineaRepository.findByCodigo(aerolinea)!=null || aerolineasAeropuertosRepository.findByIdAerolineaAndIdAeropuerto(aerolinea, aeropuerto) == null) {
             aerolineasAeropuertosRepository.save(asociacion);
         } else {
             throw new Exception();
