@@ -4,22 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import uy.edu.um.UsuariosDTO;
-import uy.edu.um.AvionesDTO;
 import uy.edu.um.ClienteTransporte;
 import uy.edu.um.ClientesDTO;
 import uy.edu.um.UsuarioTransporte;
 import uy.edu.um.proyecto.proyectotic.Mappers.ClientesMapper;
 import uy.edu.um.proyecto.proyectotic.Mappers.UsuariosMapper;
-import uy.edu.um.proyecto.proyectotic.Persistencia.Aviones.Aviones;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Clientes.Clientes;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.UsuariosRepository;
@@ -68,17 +64,18 @@ public class UsuariosRestService {
             empleadosDTO.add(usuariosMapper.toDTO(empleado));
         }
         return empleadosDTO;
-    }    
+    }
+
     @PostMapping("/registrarCliente")
-    public void registrarCliente(@RequestBody ClienteTransporte clienteTransporte) throws Exception{
-        Clientes cliente=clientesMapper.toClientes(clienteTransporte.getCliente());
+    public void registrarCliente(@RequestBody ClienteTransporte clienteTransporte) throws Exception {
+        Clientes cliente = clientesMapper.toClientes(clienteTransporte.getCliente());
         Usuarios usuario = usuariosMapper.toUsuarios(clienteTransporte.getUsuario());
         usuariosService.registroUsuarioCliente(usuario, cliente);
     }
+
     @PostMapping("/obtenerClienteEmail")
-    public ClientesDTO obtenerClienteEmail(@RequestBody String email) throws Exception{
+    public ClientesDTO obtenerClienteEmail(@RequestBody String email) throws Exception {
         return clientesMapper.toDTO(usuariosService.buscarClienteEmail(email));
     }
-
 
 }

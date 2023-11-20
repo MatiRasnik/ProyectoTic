@@ -11,4 +11,7 @@ public interface UsuariosRepository extends JpaRepository<Usuarios, String> {
 
     List<Usuarios> findByEmpresa(String nombreEmpresa);
 
+    @Query("SELECT u FROM Usuarios u WHERE u.empresa = ?1 AND u.rol = 'Piloto'")
+    List<Usuarios> findPilotos(String nombreEmpre);
+
 }

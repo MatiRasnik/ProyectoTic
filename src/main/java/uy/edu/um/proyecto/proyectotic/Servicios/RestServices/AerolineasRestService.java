@@ -13,17 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import uy.edu.um.AsociacionTransporte;
+import uy.edu.um.AvionesDTO;
 import uy.edu.um.PasajerosVuelosT;
+import uy.edu.um.UsuariosDTO;
 import uy.edu.um.VuelosDTO;
 import uy.edu.um.AerolineaTransporte;
 import uy.edu.um.AerolineasDTO;
 import uy.edu.um.proyecto.proyectotic.Mappers.AerolineasMapper;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.AerolineaRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.Aerolineas;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Aviones.Aviones;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Aviones.AvionesRepository;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.Pilotos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.AerolineasAeropuertos;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Relaciones.AerolineasAeropuertosRepository;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.Usuarios;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Usuarios.UsuariosRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Vuelo.Vuelos;
 import uy.edu.um.proyecto.proyectotic.Servicios.AerolineasService;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Pilotos.PilotosRepository;
 
 @RestController
 public class AerolineasRestService {
@@ -33,6 +41,12 @@ public class AerolineasRestService {
     private AerolineasService aerolineasService;
     @Autowired
     private AerolineaRepository aerolineaRepository;
+    @Autowired
+    private UsuariosRepository usuariosRepository;
+    @Autowired
+    private PilotosRepository pilotoRespository;
+    @Autowired
+    private AvionesRepository avionesRepository;
     @Autowired
     private AerolineasAeropuertosRepository aerolineasAeropuertosRepository;
 
@@ -57,11 +71,8 @@ public class AerolineasRestService {
 
         for (AerolineasAeropuertos combo : aerolineasAeropuertos) {
             aeropuertos.add(combo.getId().getAeropuerto());
-
         }
-
         return aeropuertos;
-
     }
 
     @GetMapping("/getAerolineas")
@@ -77,17 +88,12 @@ public class AerolineasRestService {
     @GetMapping("/getAerolineasAeropuerto/{empresa}")
     public List<AerolineasDTO> getAerolineasAeropuerto(@PathVariable("empresa") String empresa) {
         List<AerolineasAeropuertos> aerolineasAerolineas = aerolineasAeropuertosRepository.findByIdAeropuerto(empresa);
-        System.out.println(aerolineasAerolineas.size());
-        System.out.println(aerolineasAerolineas.get(0).getId().getAerolinea());
         List<AerolineasDTO> aerolineasDTOs = new ArrayList<>();
 
         for (AerolineasAeropuertos combo : aerolineasAerolineas) {
-            System.out.println(combo.getId().getAerolinea());
-            Aerolineas aerolinea = aerolineaRepository.findByNombre(combo.getId().getAerolinea());
+            Aerolineas aerolinea = aerolineaRepository.findByCodigo(combo.getId().getAerolinea());
             aerolineasDTOs.add(aerolineasMapper.toDTO(aerolinea));
         }
-        System.out.println(aerolineasDTOs.size());
-        System.out.println(aerolineasDTOs.get(0).getNombre());
         return aerolineasDTOs;
     }
 
@@ -97,9 +103,29 @@ public class AerolineasRestService {
     }
 
     @PostMapping("/vuelosComprados")
-    public List<VuelosDTO> vuelosComprados(@RequestBody String pasaporte) throws Exception{
+    public List<VuelosDTO> vuelosComprados(@RequestBody String pasaporte) throws Exception {
         return aerolineasService.vuelosPasajero(pasaporte);
+    }
 
+    @GetMapping("/getPilotos/{empresa}")
+    public List<String> getPilotos(@PathVariable("empresa") String empresa) {
+        List<Usuarios> pilotosAerolinea = usuariosRepository.findPilotos(empresa);
+        List<String> pilotos = new ArrayList<>();
+        for (Usuarios combo : pilotosAerolinea) {
+            Pilotos piloto = pilotoRespository.findByEmail(combo.getEmail());
+            pilotos.add(piloto.getLicenciaPiloto());
+        }
+        return pilotos;
+    }
+
+    @GetMapping("/getListaAviones/{empresa}")
+    public List<String> getListaAviones(@PathVariable("empresa") String empresa) {
+        List<Aviones> aviones = avionesRepository.findByEmpresa(empresa);
+        List<String> listaAviones = new ArrayList<>();
+        for (Aviones combo : aviones) {
+            listaAviones.add(combo.getMatricula());
+        }
+        return listaAviones;
     }
 
 }
