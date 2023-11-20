@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import uy.edu.um.proyecto.proyectotic.Mappers.AeropuertosMapper;
+import uy.edu.um.proyecto.proyectotic.Persistencia.Aerolineas.AerolineaRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.AeropuertoRepository;
 import uy.edu.um.proyecto.proyectotic.Persistencia.Aeropuertos.Aeropuertos;
 import uy.edu.um.proyecto.proyectotic.Servicios.AeropuertosService;
@@ -30,6 +31,8 @@ public class AeropuertoRestService {
     private AeropuertosService aeropuertoService;
     @Autowired
     private AeropuertoRepository aeropuertoRepository;
+    @Autowired
+    private AerolineaRepository aerolineaRepository;
 
     @PostMapping("/crearAeropuertos")
     public void crearAeropuerto(@RequestBody AeropuertoTransporte aeropuertoTransporte) throws Exception {
@@ -46,9 +49,13 @@ public class AeropuertoRestService {
 
     @PostMapping("/asociarAerolineasAeropuertos")
     public void asociarAerolineaAeropuerto(@RequestBody AsociacionTransporte asociacionTransporte) throws Exception {
+        if(aerolineaRepository.findByCodigo(asociacionTransporte.getAerolinea())!=null){
+            aeropuertoService.asociarAerolineaAeropuerto(asociacionTransporte.getAerolinea(),
+            asociacionTransporte.getAeropuerto());
+        } else {
+            throw new Exception();
+        }
 
-        aeropuertoService.asociarAerolineaAeropuerto(asociacionTransporte.getAerolinea(),
-                asociacionTransporte.getAeropuerto());
     }
 
     @GetMapping("/getAeropuertos")
